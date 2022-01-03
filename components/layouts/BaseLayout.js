@@ -31,7 +31,7 @@ export default function BaseLayout(props) {
       </Head>
       <Header />
       <main>
-        <div className="container">{children}</div>
+        <div className="container mx-auto">{children}</div>
       </main>
     </>
   );

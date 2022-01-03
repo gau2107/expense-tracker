@@ -1,151 +1,174 @@
 import Constants from "/resources/constants.js";
+import { useForm } from "react-hook-form";
+import Heading from "components/shared/Heading";
 export default function AddExpenseForm() {
   const categories = Constants.categories;
+  const {
+    register,
+    handleSubmit,
+    getValues,
+    formState: { errors },
+  } = useForm();
+  const onSubmit = (data) => console.log(data);
+  const atLeastOne = () => {
+    // FIXME
+    // getValues("cr_dr").length ? true : "Please tell me if this is too hard.";
+  };
   return (
-    <div className="max-w-lg mx-auto">
-      <form>
-        <div className="mb-6">
-          <label
-            forHtml="date"
-            className="text-md font-medium text-gray-600 block mb-2"
-          >
-            Date
-          </label>
-          <input
-            type="date"
-            id="date"
-            className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-            required="true"
-          />
-        </div>
-
-        <div className="mb-6">
-          <label
-            forHtml="cr_dr"
-            className="text-md font-medium text-gray-600 block mb-2"
-          >
-            Credit / Debit
-          </label>
-          <div>
-            <input
-              id="country-option-1"
-              type="radio"
-              name="cr_dr"
-              value="USA"
-              className="h-4 w-4 border-gray-300 focus:ring-2 focus:ring-blue-300"
-              aria-labelledby="country-option-1"
-              aria-describedby="country-option-1"
-              checked=""
-            />
+    <>
+      <div className="max-w-lg mx-auto">
+        <Heading heading={`Add Expense`} />
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div className="mb-6">
             <label
-              forHtml="credit"
-              className="text-md font-medium text-gray-600 m-4"
+              forHtml="date"
+              className="text-md font-medium text-gray-600 block mb-2"
             >
-              Credit
+              Date
             </label>
             <input
-              id="country-option-1"
-              type="radio"
-              name="countries"
-              value="USA"
-              className="h-4 w-4 border-gray-300 focus:ring-2 focus:ring-blue-300"
-              aria-labelledby="country-option-1"
-              aria-describedby="country-option-1"
-              checked=""
+              type="date"
+              id="date"
+              className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+              {...register("date", { required: true })}
             />
-            <label
-              forHtml="Debit"
-              className="text-md font-medium text-gray-600 m-4"
-            >
-              Debit
-            </label>
+            {errors.date && (
+              <span className="text-red-500">This field is required</span>
+            )}
           </div>
-        </div>
-
-        <div className="mb-6">
-          <label
-            forHtml="category"
-            className="text-md font-medium text-gray-600 block mb-2"
-          >
-            Category
-          </label>
-          <select
-            name="cars"
-            id="cars"
-            className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-            required="true"
-          >
-            <option value="">Select any one</option>
-            {categories.map((cat) => (
-              <option key={cat.value} value={cat.value}>
-                {cat.label}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        <div className="mb-6">
-          <label
-            forHtml="date"
-            className="text-md font-medium text-gray-600 block mb-2"
-          >
-            Amount
-          </label>
+          <div className="mb-6">
+            <label
+              forHtml="cr_dr"
+              className="text-md font-medium text-gray-600 block mb-2"
+            >
+              Credit / Debit
+            </label>
+            <div>
+              <input
+                id="country-option-1"
+                type="radio"
+                name="cr_dr"
+                value="cr"
+                className="h-4 w-4 border-gray-300 focus:ring-2 focus:ring-blue-300"
+                aria-labelledby="country-option-1"
+                aria-describedby="country-option-1"
+                {...register("cr_dr", {
+                  validate: atLeastOne,
+                })}
+              />
+              <label
+                forHtml="credit"
+                className="text-md font-medium text-gray-600 m-4"
+              >
+                Credit
+              </label>
+              <input
+                id="country-option-1"
+                type="radio"
+                name="cr_dr"
+                value="cr"
+                className="h-4 w-4 border-gray-300 focus:ring-2 focus:ring-blue-300"
+                aria-labelledby="country-option-1"
+                aria-describedby="country-option-1"
+                {...register("cr_dr", {
+                  validate: atLeastOne,
+                })}
+              />
+              <label
+                forHtml="Debit"
+                className="text-md font-medium text-gray-600 m-4"
+              >
+                Debit
+              </label>
+              {errors.cr_dr && (
+                <span className="text-red-500">This field is required</span>
+              )}
+            </div>
+          </div>
+          <div className="mb-6">
+            <label
+              forHtml="category"
+              className="text-md font-medium text-gray-600 block mb-2"
+            >
+              Category
+            </label>
+            <select
+              name="category"
+              id="category"
+              className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+              {...register("category", { required: true })}
+            >
+              <option value="">Select any one</option>
+              {categories.map((cat) => (
+                <option key={cat.value} value={cat.value}>
+                  {cat.label}
+                </option>
+              ))}
+            </select>
+            {errors.category && (
+              <span className="text-red-500">This field is required</span>
+            )}
+          </div>
+          <div className="mb-6">
+            <label
+              forHtml="amount"
+              className="text-md font-medium text-gray-600 block mb-2"
+            >
+              Amount
+            </label>
+            <input
+              type="number"
+              id="amount"
+              className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+              {...register("amount", { required: true })}
+            />
+            {errors.amount && (
+              <span className="text-red-500">This field is required</span>
+            )}
+          </div>
+          <div className="mb-6">
+            <label
+              forHtml="priority"
+              className="text-md font-medium text-gray-600 block mb-2"
+            >
+              Priority
+            </label>
+            <input
+              type="range"
+              id="priority"
+              list="priority"
+              min={1}
+              max={5}
+              step={1}
+              className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+              required="false"
+            ></input>
+            <datalist id="priority">
+              <option value="1" label="Lowest"></option>
+              <option value="2" label="Low"></option>
+              <option value="3" label="Medium"></option>
+              <option value="4" label="High"></option>
+              <option value="5" label="Highest"></option>
+            </datalist>
+          </div>
+          <div className="mb-6">
+            <label
+              forHtml="note"
+              className="text-md font-medium text-gray-600 block mb-2"
+            >
+              Note
+            </label>
+            <textarea
+              id="note"
+              className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+            />
+          </div>
           <input
-            type="number"
-            id="amount"
-            className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-            required="true"
+            type="submit"
+            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
           />
-        </div>
-
-        <div className="mb-6">
-          <label
-            forHtml="priority"
-            className="text-md font-medium text-gray-600 block mb-2"
-          >
-            Priority
-          </label>
-          <input
-            type="range"
-            id="priority"
-            list="priority"
-            min={1}
-            max={5}
-            step={1}
-            className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-            required="false"
-          ></input>
-          <datalist id="priority">
-            <option value="1" label="Lowest"></option>
-            <option value="2" label="Low"></option>
-            <option value="3" label="Medium"></option>
-            <option value="4" label="High"></option>
-            <option value="5" label="Highest"></option>
-          </datalist>
-        </div>
-
-        <div className="mb-6">
-          <label
-            forHtml="note"
-            className="text-md font-medium text-gray-600 block mb-2"
-          >
-            Note
-          </label>
-          <textarea
-            id="note"
-            className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-            required="false"
-          />
-        </div>
-
-        <button
-          type="submit"
-          className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-        >
-          Submit
-        </button>
-      </form>
-    </div>
+        </form>
+      </div>
+    </>
   );
 }
