@@ -7,4 +7,9 @@ module.exports = Object.freeze({
     { value: "Food", label: "Food" },
     { value: "Travelling", label: "Travelling" }
   ],
+  navMenus: [
+    {title: 'Budget', link: '/budget/add'},
+    {title: 'Add Expense', link: '/expense/add'},
+    {title: 'Expenses', link: '/expense'},
+  ],
 });

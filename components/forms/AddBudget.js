@@ -1,20 +1,16 @@
+import Input from "components/shared/Input";
 import { useForm } from "react-hook-form";
 import { categories } from "resources/constants";
-
-export default function AddExpenseForm() {
+export default function AddBudgetForm() {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-
   const onSubmit = (data) => console.log(data);
-  const atLeastOne = () => {
-    // FIXME
-    // getValues("cr_dr").length ? true : "Please tell me if this is too hard.";
-  };
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
+      <Input register={register} label={'Salary'} id={'salary'} type={'number'}/>
       <div className="mb-6">
         <label
           forHtml="date"
@@ -31,55 +27,6 @@ export default function AddExpenseForm() {
         {errors.date && (
           <span className="text-red-500">This field is required</span>
         )}
-      </div>
-      <div className="mb-6">
-        <label
-          forHtml="cr_dr"
-          className="text-md font-medium text-gray-600 block mb-2"
-        >
-          Credit / Debit
-        </label>
-        <div>
-          <input
-            id="country-option-1"
-            type="radio"
-            name="cr_dr"
-            value="cr"
-            className="h-4 w-4 border-gray-300 focus:ring-2 focus:ring-blue-300"
-            aria-labelledby="country-option-1"
-            aria-describedby="country-option-1"
-            {...register("cr_dr", {
-              validate: atLeastOne,
-            })}
-          />
-          <label
-            forHtml="credit"
-            className="text-md font-medium text-gray-600 m-4"
-          >
-            Credit
-          </label>
-          <input
-            id="country-option-1"
-            type="radio"
-            name="cr_dr"
-            value="cr"
-            className="h-4 w-4 border-gray-300 focus:ring-2 focus:ring-blue-300"
-            aria-labelledby="country-option-1"
-            aria-describedby="country-option-1"
-            {...register("cr_dr", {
-              validate: atLeastOne,
-            })}
-          />
-          <label
-            forHtml="Debit"
-            className="text-md font-medium text-gray-600 m-4"
-          >
-            Debit
-          </label>
-          {errors.cr_dr && (
-            <span className="text-red-500">This field is required</span>
-          )}
-        </div>
       </div>
       <div className="mb-6">
         <label
@@ -121,31 +68,6 @@ export default function AddExpenseForm() {
         {errors.amount && (
           <span className="text-red-500">This field is required</span>
         )}
-      </div>
-      <div className="mb-6">
-        <label
-          forHtml="priority"
-          className="text-md font-medium text-gray-600 block mb-2"
-        >
-          Priority
-        </label>
-        <input
-          type="range"
-          id="priority"
-          list="priority"
-          min={1}
-          max={5}
-          step={1}
-          className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-          required="false"
-        ></input>
-        <datalist id="priority">
-          <option value="1" label="Lowest"></option>
-          <option value="2" label="Low"></option>
-          <option value="3" label="Medium"></option>
-          <option value="4" label="High"></option>
-          <option value="5" label="Highest"></option>
-        </datalist>
       </div>
       <div className="mb-6">
         <label

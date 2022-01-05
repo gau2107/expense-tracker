@@ -1,9 +1,10 @@
 import Link from "next/link";
-
+import { navMenus } from "resources/constants";
 export default function Header() {
   return (
     <>
       <nav className="flex items-center justify-between flex-wrap bg-black p-6">
+        {/* root nav */}
         <div className="flex items-center flex-shrink-0 text-white mr-6">
           <svg
             className="fill-current h-8 w-8 mr-2"
@@ -22,6 +23,7 @@ export default function Header() {
             </a>
           </Link>
         </div>
+
         <div className="block lg:hidden">
           <button className="flex items-center px-3 py-2 border rounded text-teal-200 border-teal-400 hover:text-white hover:border-white">
             <svg
@@ -34,21 +36,19 @@ export default function Header() {
             </svg>
           </button>
         </div>
+
         <div className="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
           <div className="text-sm lg:flex-grow">
-            <Link href="/expense/add">
-              <a
-                href="#responsive-header"
-                className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4"
-              >
-                Add Expense
-              </a>
-            </Link>
-            <Link href="/expense">
-              <a className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
-                Expenses
-              </a>
-            </Link>
+            {navMenus.map((menu, key) => (
+              <Link key={key} href={menu.link}>
+                <a
+                  href="#responsive-header"
+                  className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4"
+                >
+                  {menu.title}
+                </a>
+              </Link>
+            ))}
           </div>
           <div>
             <a
