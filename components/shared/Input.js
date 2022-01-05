@@ -1,6 +1,6 @@
-export default function Input({ register, errors = {}, label, errorMsg, id, type }) {
+export default function Input({ register, errors = {}, label, errorMsg, id, type, divClassName }) {
   return (
-    <div className="mb-6">
+    <div className={divClassName || "mb-6"}>
       <label
         forHtml="date"
         className="text-md font-medium text-gray-600 block mb-2"
