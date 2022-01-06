@@ -1,13 +1,15 @@
 export default function Input({
-  register,
+  name,
   errors = {},
   label,
   errorMsg,
   id,
   type,
   divClassName,
-  placeHolder
+  placeHolder,
+  inpRef
 }) {
+  console.log(errors);
   return (
     <div className={divClassName || "mb-6"}>
       {label && (
@@ -19,13 +21,14 @@ export default function Input({
         </label>
       )}
       <input
+        name={name}
         type={type || "text"}
         id={id} placeholder={placeHolder}
         className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-        {...register("date", { required: true })}
+        {...inpRef}
       />
-      {errors.date && (
-        <span className="text-red-500">
+      {errors[name] && (
+        <span className="text-red-500 text-sm ">
           {errorMsg || "This field is required"}
         </span>
       )}

@@ -1,13 +1,13 @@
 export default function Select({
-  register,
   errors = {},
   label,
-  errorMsg,
+  name,
   id,
   divClassName,
   placeHolder,
   options,
-  defaultValue
+  defaultValue,
+  inpRef,
 }) {
   return (
     <div className={divClassName || "mb-6"}>
@@ -20,9 +20,11 @@ export default function Select({
         </label>
       )}
       <select
-        id={id} placeholder={placeHolder}
+        name={name}
+        id={id}
+        placeholder={placeHolder}
         className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-        {...register("category", { required: true })}
+        {...inpRef}
       >
         {defaultValue && <option value="">Category</option>}
         {options.map((cat) => (
