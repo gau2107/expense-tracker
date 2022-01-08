@@ -1,3 +1,5 @@
+import ValidationMessage from "./ValidationMesage";
+
 export default function Input({
   name,
   errors = {},
@@ -9,7 +11,6 @@ export default function Input({
   placeHolder,
   inpRef
 }) {
-  console.log(errors);
   return (
     <div className={divClassName || "mb-6"}>
       {label && (
@@ -27,11 +28,7 @@ export default function Input({
         className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
         {...inpRef}
       />
-      {errors[name] && (
-        <span className="text-red-500 text-sm ">
-          {errorMsg || "This field is required"}
-        </span>
-      )}
+       {errors[name] && <ValidationMessage message={errorMsg}/>}
     </div>
   );
 }

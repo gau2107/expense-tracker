@@ -1,3 +1,5 @@
+import ValidationMessage from "./ValidationMesage";
+
 export default function Select({
   errors = {},
   label,
@@ -8,6 +10,7 @@ export default function Select({
   options,
   defaultValue,
   inpRef,
+  errorMsg
 }) {
   return (
     <div className={divClassName || "mb-6"}>
@@ -33,9 +36,7 @@ export default function Select({
           </option>
         ))}
       </select>
-      {errors.category && (
-        <span className="text-red-500">This field is required</span>
-      )}
+      {errors[name] && <ValidationMessage message={errorMsg}/>}
     </div>
   );
 }

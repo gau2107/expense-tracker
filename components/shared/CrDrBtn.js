@@ -1,28 +1,55 @@
-export default function CrDrBtn() {
+import ValidationMessage from "./ValidationMesage";
+
+export default function CrDrBtn({ handleClick, selectedItem }) {
   return (
     <div className="flex items-center justify-center">
       <div
         className="inline-flex shadow-md hover:shadow-lg focus:shadow-lg"
         role="toolbar"
       >
-        <button
-          type="button"
-          className="rounded-l inline-block px-4 py-2.5 bg-white focus:ring-0
-                text-black font-medium text-xs leading-tight uppercase focus:outline-none
-                hover:bg-black hover:text-white focus:bg-black focus:text-white  
-                active:bg-black active:text-white transition duration-150 ease-in-out"
-        >
-          Cr
-        </button>
-        <button
-          type="button"
-          className="rounded-l inline-block px-4 py-2.5 bg-white focus:ring-0
-                text-black font-medium text-xs leading-tight uppercase focus:outline-none
-                hover:bg-black hover:text-white focus:bg-black focus:text-white  
-                active:bg-black active:text-white transition duration-150 ease-in-out"
-        >
-          Db
-        </button>
+        {selectedItem === "cr" ? (
+          <button
+            type="button"
+            onClick={() => handleClick("cr")}
+            className="rounded-l inline-block px-4 py-2.5 bg-black focus:ring-0
+              text-white font-medium text-xs leading-tight uppercase focus:outline-none
+              transition duration-150 ease-in-out"
+          >
+            Cr
+          </button>
+        ) : (
+          <button
+            type="button"
+            onClick={() => handleClick("cr")}
+            className="rounded-l inline-block px-4 py-2.5 bg-white focus:ring-0
+              text-black font-medium text-xs leading-tight uppercase focus:outline-none   
+              transition duration-150 ease-in-out"
+          >
+            Cr {!selectedItem && <ValidationMessage message={'*'} />}
+          </button>
+        )}
+
+        {selectedItem === "dr" ? (
+          <button
+            type="button"
+            onClick={() => handleClick("dr")}
+            className="rounded-l inline-block px-4 py-2.5 bg-black focus:ring-0
+            text-white font-medium text-xs leading-tight uppercase focus:outline-none
+            transition duration-150 ease-in-out"
+          >
+            Dr
+          </button>
+        ) : (
+          <button
+            type="button"
+            onClick={() => handleClick("dr")}
+            className="rounded-l inline-block px-4 py-2.5 bg-white focus:ring-0
+            text-black font-medium text-xs leading-tight uppercase focus:outline-none   
+            transition duration-150 ease-in-out"
+          >
+            Dr {!selectedItem && <ValidationMessage message={'*'} />}
+          </button>
+        )}
       </div>
     </div>
   );
