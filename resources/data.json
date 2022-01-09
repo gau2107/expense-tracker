@@ -4,7 +4,7 @@
       "no": 1,
       "date": "12",
       "category": "Shopping",
-      "dr_cr": "dr",
+      "type": "dr",
       "note": "lorem ipsum lorem ipsum lorem ipsum lorem ipsum ",
       "priority": "5",
       "amount": "499"
@@ -13,7 +13,7 @@
       "no": 1,
       "date": "12",
       "category": "Shopping",
-      "dr_cr": "dr",
+      "type": "dr",
       "note": "lorem ipsum lorem ipsum lorem ipsum lorem ipsum ",
       "priority": "5",
       "amount": "499"
@@ -22,7 +22,7 @@
       "no": 1,
       "date": "12",
       "category": "Shopping",
-      "dr_cr": "dr",
+      "type": "dr",
       "note": "lorem ipsum lorem ipsum lorem ipsum lorem ipsum ",
       "priority": "5",
       "amount": "499"
@@ -31,7 +31,7 @@
       "no": 1,
       "date": "12",
       "category": "Shopping",
-      "dr_cr": "dr",
+      "type": "dr",
       "note": "lorem ipsum lorem ipsum lorem ipsum lorem ipsum ",
       "priority": "5",
       "amount": "499"
@@ -40,7 +40,7 @@
       "no": 1,
       "date": "12",
       "category": "Shopping",
-      "dr_cr": "cr",
+      "type": "cr",
       "note": "lorem ipsum lorem ipsum lorem ipsum lorem ipsum ",
       "priority": "5",
       "amount": "499"
@@ -49,7 +49,7 @@
       "no": 1,
       "date": "12",
       "category": "Shopping",
-      "dr_cr": "dr",
+      "type": "dr",
       "note": "lorem ipsum lorem ipsum lorem ipsum lorem ipsum ",
       "priority": "5",
       "amount": "499"
@@ -58,7 +58,7 @@
       "no": 1,
       "date": "12",
       "category": "Shopping",
-      "dr_cr": "dr",
+      "type": "dr",
       "note": "lorem ipsum lorem ipsum lorem ipsum lorem ipsum ",
       "priority": "5",
       "amount": "499"
@@ -67,7 +67,7 @@
       "no": 1,
       "date": "12",
       "category": "Shopping",
-      "dr_cr": "dr",
+      "type": "dr",
       "note": "lorem ipsum lorem ipsum lorem ipsum lorem ipsum ",
       "priority": "5",
       "amount": "499"
@@ -76,7 +76,7 @@
       "no": 1,
       "date": "12",
       "category": "Shopping",
-      "dr_cr": "cr",
+      "type": "cr",
       "note": "lorem ipsum lorem ipsum lorem ipsum lorem ipsum ",
       "priority": "5",
       "amount": "499"
@@ -85,7 +85,7 @@
       "no": 1,
       "date": "12",
       "category": "Shopping",
-      "dr_cr": "dr",
+      "type": "dr",
       "note": "lorem ipsum lorem ipsum lorem ipsum lorem ipsum ",
       "priority": "5",
       "amount": "499"
@@ -94,7 +94,7 @@
       "no": 1,
       "date": "12",
       "category": "Shopping",
-      "dr_cr": "cr",
+      "type": "cr",
       "note": "lorem ipsum lorem ipsum lorem ipsum lorem ipsum ",
       "priority": "5",
       "amount": "499"

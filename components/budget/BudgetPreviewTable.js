@@ -1,8 +1,6 @@
 import DeleteSvg from "components/shared/svg/Delete";
 import EditSvg from "components/shared/svg/Edit";
-import Data from "/resources/data.json";
-export default function BudgetPreviewTable({}) {
-  const data = Data.data;
+export default function BudgetPreviewTable({data}) {
   return (
     <table className="min-w-full table-fixed">
       <thead className="bg-white border-b">
@@ -55,7 +53,7 @@ export default function BudgetPreviewTable({}) {
         {data.map((rowData, key) => (
           <tr
             className={` border-b ${
-              rowData.dr_cr === "cr"
+              rowData.type === "cr"
                 ? "bg-green-50 border-green-100"
                 : "bg-red-50 border-red-100"
             }`}
@@ -65,7 +63,7 @@ export default function BudgetPreviewTable({}) {
               {key + 1}
             </td>
             <td className="text-sm text-gray-900 font-light px-2 py-2 whitespace-nowrap">
-              {rowData.dr_cr}
+              {rowData.type}
             </td>
             <td className="text-sm text-gray-900 font-light px-2 py-2 whitespace-nowrap">
               {rowData.date}

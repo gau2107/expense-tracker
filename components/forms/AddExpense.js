@@ -11,7 +11,7 @@ export default function AddExpenseForm() {
   const onSubmit = (data) => console.log(data);
   const atLeastOne = () => {
     // FIXME
-    // getValues("cr_dr").length ? true : "Please tell me if this is too hard.";
+    // getValues("type").length ? true : "Please tell me if this is too hard.";
   };
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -34,7 +34,7 @@ export default function AddExpenseForm() {
       </div>
       <div className="mb-6">
         <label
-          forHtml="cr_dr"
+          forHtml="type"
           className="text-md font-medium text-gray-600 block mb-2"
         >
           Credit / Debit
@@ -43,12 +43,12 @@ export default function AddExpenseForm() {
           <input
             id="country-option-1"
             type="radio"
-            name="cr_dr"
+            name="type"
             value="cr"
             className="h-4 w-4 border-gray-300 focus:ring-2 focus:ring-blue-300"
             aria-labelledby="country-option-1"
             aria-describedby="country-option-1"
-            {...register("cr_dr", {
+            {...register("type", {
               validate: atLeastOne,
             })}
           />
@@ -61,12 +61,12 @@ export default function AddExpenseForm() {
           <input
             id="country-option-1"
             type="radio"
-            name="cr_dr"
+            name="type"
             value="cr"
             className="h-4 w-4 border-gray-300 focus:ring-2 focus:ring-blue-300"
             aria-labelledby="country-option-1"
             aria-describedby="country-option-1"
-            {...register("cr_dr", {
+            {...register("type", {
               validate: atLeastOne,
             })}
           />
@@ -76,7 +76,7 @@ export default function AddExpenseForm() {
           >
             Debit
           </label>
-          {errors.cr_dr && (
+          {errors.type && (
             <span className="text-red-500">This field is required</span>
           )}
         </div>

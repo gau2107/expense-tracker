@@ -7,8 +7,7 @@ import TextArea from "components/shared/TextArea";
 import { categories } from "resources/constants";
 import { useForm } from "react-hook-form";
 import { amount, category, date } from "resources/messages";
-export default function AddBudgetForm({}) {
-
+export default function AddBudgetForm({callbackFn}) {
   const {
     register,
     handleSubmit,
@@ -16,12 +15,13 @@ export default function AddBudgetForm({}) {
   } = useForm();
   //FIXME parse float amount
 
-  const [type, setType] = useState('')
-  const handleCrDrClick = value => setType(value);
+  const [type, setType] = useState("");
+  const handleCrDrClick = (value) => setType(value);
 
-  const onSubmit = data => {
-    data = {...data, type: type}
-    console.log(data);
+  const onSubmit = (data) => {
+    if (!type.length) return false;
+    data = { ...data, type: type };
+    callbackFn(data);
   };
 
   return (

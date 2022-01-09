@@ -66,7 +66,7 @@ export default function ExpenseTable() {
                         </div>
                       </td>
                       <td className="p-2 whitespace-nowrap">
-                        <div className={`text-lg text-left text-${data.dr_cr === 'dr' ? 'red': 'green'}-500 font-medium`}>{Constants[data.dr_cr]}</div>
+                        <div className={`text-lg text-left text-${data.type === 'dr' ? 'red': 'green'}-500 font-medium`}>{Constants[data.type]}</div>
                       </td>
                       <td className="p-2 whitespace-nowrap">
                         <div className="text-left">{data.note}</div>
@@ -75,7 +75,7 @@ export default function ExpenseTable() {
                         <div className="text-left">{data.priority}</div>
                       </td>
                       <td className="p-2 whitespace-nowrap">
-                        <div className={`text-right text-${data.dr_cr === 'dr' ? 'red' : 'green'}-500 font-medium`}>{data.amount}</div>
+                        <div className={`text-right text-${data.type === 'dr' ? 'red' : 'green'}-500 font-medium`}>{data.amount}</div>
                       </td>
                     </tr>
                   ))}
