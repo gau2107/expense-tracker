@@ -1,89 +1,81 @@
 import DeleteSvg from "components/shared/svg/Delete";
 import EditSvg from "components/shared/svg/Edit";
-export default function BudgetPreviewTable({data}) {
+import constants, { budgetThs } from "resources/constants";
+export default function BudgetPreviewTable({data, handleEdit, handleDelete}) {
   return (
-    <table className="min-w-full table-fixed">
-      <thead className="bg-white border-b">
-        <tr>
-          <th
-            scope="col"
-            className="text-md font-medium text-gray-900 pr-6 py-4 text-left"
-          >
-            #
-          </th>
-          <th
-            scope="col"
-            className="text-md font-medium text-gray-900 pr-6 py-4 text-left"
-          >
-            Cr / Dr
-          </th>
-          <th
-            scope="col"
-            className="text-md font-medium text-gray-900 pr-6 py-4 text-left"
-          >
-            Date
-          </th>
-          <th
-            scope="col"
-            className="text-md font-medium text-gray-900 pr-6 py-4 text-left"
-          >
-            Category
-          </th>
-          <th
-            scope="col"
-            className="text-md font-medium text-gray-900 pr-6 py-4 text-left"
-          >
-            Note
-          </th>
-          <th
-            scope="col"
-            className="text-md font-medium text-gray-900 pr-6 py-4 text-left"
-          >
-            Amount
-          </th>
-          <th
-            scope="col"
-            className="text-md font-medium text-gray-900 pr-6 py-4 text-left"
-          >
-            Actions
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        {data.map((rowData, key) => (
-          <tr
-            className={` border-b ${
-              rowData.type === "cr"
-                ? "bg-green-50 border-green-100"
-                : "bg-red-50 border-red-100"
-            }`}
-            key={key}
-          >
-            <td className="px-2 py-2 whitespace-nowrap text-sm font-medium text-gray-900">
-              {key + 1}
-            </td>
-            <td className="text-sm text-gray-900 font-light px-2 py-2 whitespace-nowrap">
-              {rowData.type}
-            </td>
-            <td className="text-sm text-gray-900 font-light px-2 py-2 whitespace-nowrap">
-              {rowData.date}
-            </td>
-            <td className="text-sm text-gray-900 font-light px-2 py-2 whitespace-nowrap">
-              {rowData.category}
-            </td>
-            <td className="text-sm text-gray-900 font-light px-2 py-2">
-              {rowData.note}
-            </td>
-            <td className="text-sm text-gray-900 font-light px-2 py-2 whitespace-nowrap">
-              {rowData.amount}
-            </td>
-            <td className="text-sm text-gray-900 font-light px-2 py-2 whitespace-nowrap">
-              <EditSvg />
-              <DeleteSvg />
-            </td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
+    <section className="antialiased bg-gray-100 text-gray-600 h-fit px-4">
+      <div className="flex flex-col justify-center h-full">
+        <div className="w-full mx-auto bg-white shadow-lg rounded-sm border border-gray-200 m-8">
+          <header className="px-5 py-4 border-b border-gray-100">
+            <h2 className="font-semibold text-gray-800">{`Budget Preview`}</h2>
+          </header>
+          <div className="p-3">
+            <div className="overflow-x-auto">
+              <table className="table-auto w-full">
+                <thead className="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
+                  <tr>
+                    {budgetThs.map((th) => (
+                      <th key={th} className="p-2 whitespace-nowrap">
+                        <div className={`font-semibold text-${th==='Amount' ? 'right' : th==='Actions' ? 'center' : 'left'}`}>{th}</div>
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody className="text-sm divide-y divide-gray-100">
+                  {data.map((rowData, key) => (
+                    <tr key={key}>
+                      <td className="p-2 whitespace-nowrap">
+                        <div className="flex items-center">
+                          <div className="font-medium text-gray-800">
+                            {key + 1}
+                          </div>
+                        </div>
+                      </td>
+                      <td className="p-2 whitespace-nowrap">
+                        <div
+                          className={`text-lg text-left text-${
+                            rowData.type === "dr" ? "red" : "green"
+                          }-500 font-medium`}
+                        >
+                          {constants[rowData.type]}
+                        </div>
+                      </td>
+                      <td className="p-2 whitespace-nowrap">
+                        <div className="text-left">{rowData.date}</div>
+                      </td>
+                      <td className="p-2 whitespace-nowrap">
+                        <div className="text-left">{rowData.frequency}</div>
+                      </td>
+                      <td className="p-2 whitespace-nowrap">
+                        <div className="text-left">{rowData.category}</div>
+                      </td>
+                      
+                      <td className="p-2 whitespace-nowrap">
+                        <div className="text-left">{rowData.note}</div>
+                      </td>
+                      <td className="p-2 whitespace-nowrap">
+                        <div
+                          className={`text-right text-${
+                            rowData.type === "dr" ? "red" : "green"
+                          }-500 font-medium`}
+                        >
+                          {rowData.amount}
+                        </div>
+                      </td>
+                      <td className="p-2 whitespace-nowrap">
+                        <div className="text-center">
+                          <EditSvg onClick={() => handleEdit(rowData)} />
+                          <DeleteSvg onClick={() => handleDelete(key)} />
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }

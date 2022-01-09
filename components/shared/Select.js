@@ -29,7 +29,7 @@ export default function Select({
         className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
         {...inpRef}
       >
-        {defaultValue && <option value="">Category</option>}
+        {defaultValue && <option value="">{defaultValue}</option>}
         {options.map((cat) => (
           <option key={cat.value} value={cat.value}>
             {cat.label}

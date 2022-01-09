@@ -17,7 +17,7 @@ export default function Header() {
           </svg>
           <Link href="/">
             <a>
-              <span className="font-semibold text-xl tracking-tight">
+              <span className="font-semibold text-2xl tracking-tight">
                 Expense Tracker
               </span>
             </a>
@@ -43,7 +43,7 @@ export default function Header() {
               <Link key={key} href={menu.link}>
                 <a
                   href="#responsive-header"
-                  className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4"
+                  className="lg:inline-block lg:mt-0 text-white hover:text-yellow-50 mr-4 font-medium text-base"
                 >
                   {menu.title}
                 </a>

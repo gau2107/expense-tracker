@@ -4,10 +4,10 @@ import CrDrBtn from "components/shared/CrDrBtn";
 import Input from "components/shared/Input";
 import Select from "components/shared/Select";
 import TextArea from "components/shared/TextArea";
-import { categories } from "resources/constants";
+import { categories, frequencies } from "resources/constants";
 import { useForm } from "react-hook-form";
-import { amount, category, date } from "resources/messages";
-export default function AddBudgetForm({callbackFn}) {
+import { amount, category, date, frequency } from "resources/messages";
+export default function AddBudgetForm({callbackFn, editFormData}) {
   const {
     register,
     handleSubmit,
@@ -18,10 +18,12 @@ export default function AddBudgetForm({callbackFn}) {
   const [type, setType] = useState("");
   const handleCrDrClick = (value) => setType(value);
 
-  const onSubmit = (data) => {
+  const onSubmit = (data, ev) => {
     if (!type.length) return false;
     data = { ...data, type: type };
     callbackFn(data);
+    setType('');
+    ev.target.reset();
   };
 
   return (
@@ -50,6 +52,17 @@ export default function AddBudgetForm({callbackFn}) {
           inpRef={{ ...register("date", { required: true }) }}
           errors={errors}
           errorMsg={date}
+        />
+
+        <Select
+          className="col-span-2"
+          defaultValue={"Frequency"}
+          id={"frequency"}
+          name={"frequency"}
+          options={frequencies}
+          inpRef={{ ...register("frequency", { required: true }) }}
+          errors={errors}
+          errorMsg={frequency}
         />
 
         <Select

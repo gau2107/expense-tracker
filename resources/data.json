@@ -7,7 +7,8 @@
       "type": "dr",
       "note": "lorem ipsum lorem ipsum lorem ipsum lorem ipsum ",
       "priority": "5",
-      "amount": "499"
+      "amount": "499",
+      "frequency": "Weekly"
     },
     {
       "no": 1,
@@ -16,7 +17,8 @@
       "type": "dr",
       "note": "lorem ipsum lorem ipsum lorem ipsum lorem ipsum ",
       "priority": "5",
-      "amount": "499"
+      "amount": "499",
+      "frequency": "Weekly"
     },
     {
       "no": 1,
@@ -25,16 +27,8 @@
       "type": "dr",
       "note": "lorem ipsum lorem ipsum lorem ipsum lorem ipsum ",
       "priority": "5",
-      "amount": "499"
-    },
-    {
-      "no": 1,
-      "date": "12",
-      "category": "Shopping",
-      "type": "dr",
-      "note": "lorem ipsum lorem ipsum lorem ipsum lorem ipsum ",
-      "priority": "5",
-      "amount": "499"
+      "amount": "499",
+      "frequency": "Weekly"
     },
     {
       "no": 1,
@@ -43,7 +37,8 @@
       "type": "cr",
       "note": "lorem ipsum lorem ipsum lorem ipsum lorem ipsum ",
       "priority": "5",
-      "amount": "499"
+      "amount": "499",
+      "frequency": "Weekly"
     },
     {
       "no": 1,
@@ -52,7 +47,8 @@
       "type": "dr",
       "note": "lorem ipsum lorem ipsum lorem ipsum lorem ipsum ",
       "priority": "5",
-      "amount": "499"
+      "amount": "499",
+      "frequency": "Weekly"
     },
     {
       "no": 1,
@@ -61,7 +57,8 @@
       "type": "dr",
       "note": "lorem ipsum lorem ipsum lorem ipsum lorem ipsum ",
       "priority": "5",
-      "amount": "499"
+      "amount": "499",
+      "frequency": "Weekly"
     },
     {
       "no": 1,
@@ -70,7 +67,8 @@
       "type": "dr",
       "note": "lorem ipsum lorem ipsum lorem ipsum lorem ipsum ",
       "priority": "5",
-      "amount": "499"
+      "amount": "499",
+      "frequency": "Weekly"
     },
     {
       "no": 1,
@@ -79,7 +77,8 @@
       "type": "cr",
       "note": "lorem ipsum lorem ipsum lorem ipsum lorem ipsum ",
       "priority": "5",
-      "amount": "499"
+      "amount": "499",
+      "frequency": "Weekly"
     },
     {
       "no": 1,
@@ -88,7 +87,8 @@
       "type": "dr",
       "note": "lorem ipsum lorem ipsum lorem ipsum lorem ipsum ",
       "priority": "5",
-      "amount": "499"
+      "amount": "499",
+      "frequency": "Weekly"
     },
     {
       "no": 1,
@@ -97,7 +97,8 @@
       "type": "cr",
       "note": "lorem ipsum lorem ipsum lorem ipsum lorem ipsum ",
       "priority": "5",
-      "amount": "499"
+      "amount": "499",
+      "frequency": "Weekly"
     }
   ]
 }
