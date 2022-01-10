@@ -1,9 +1,9 @@
 module.exports = Object.freeze({
-  type: '*',
-  amount: 'Please enter amount',
-  invalidAmount: 'Entered amount is invalid',
-  category: 'Please select category',
-  frequency: 'Please select frequency',
-  date: 'Please select date',
-  invalidDate: 'Entered date is invalid'
+  typeMsg: '*',
+  amountMsg: 'Please enter amount',
+  invalidAmountMsg: 'Entered amount is invalid',
+  categoryMsg: 'Please select category',
+  frequencyMsg: 'Please select frequency',
+  dateMsg: 'Please select date',
+  invalidDateMsg: 'Entered date is invalid'
 });

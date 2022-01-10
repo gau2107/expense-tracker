@@ -1,7 +1,7 @@
 import Data from "/resources/data.json";
-export default function EditSvg({}) {
+export default function EditSvg({onClick}) {
   return (
-    <a>
+    <a onClick={onClick}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         className="h-6 w-6"

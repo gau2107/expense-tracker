@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Button from "components/shared/Button";
 import CrDrBtn from "components/shared/CrDrBtn";
 import Input from "components/shared/Input";
@@ -6,23 +6,27 @@ import Select from "components/shared/Select";
 import TextArea from "components/shared/TextArea";
 import { categories, frequencies } from "resources/constants";
 import { useForm } from "react-hook-form";
-import { amount, category, date, frequency } from "resources/messages";
-export default function AddBudgetForm({callbackFn, editFormData}) {
+import { amountMsg, categoryMsg, dateMsg, frequencyMsg } from "resources/messages";
+export default function AddBudgetForm({ callbackFn, editFormData }) {
+  const { amount, date, frequency, category, note } = editFormData;
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  //FIXME parse float amount
 
   const [type, setType] = useState("");
   const handleCrDrClick = (value) => setType(value);
 
+  useEffect(() => {
+    setType(editFormData.type);
+  }, [editFormData.type]);
+
   const onSubmit = (data, ev) => {
     if (!type.length) return false;
-    data = { ...data, type: type };
+    data = { ...data, type: type, id: editFormData?.id };
     callbackFn(data);
-    setType('');
+    setType("");
     ev.target.reset();
   };
 
@@ -30,10 +34,15 @@ export default function AddBudgetForm({callbackFn, editFormData}) {
     <form className="mt-4" onSubmit={handleSubmit(onSubmit)}>
       <div className="grid grid-cols-10 gap-2">
         <div className="col-span-1 ">
-          <CrDrBtn handleClick={handleCrDrClick} selectedItem={type} />
+          <CrDrBtn
+            handleClick={handleCrDrClick}
+            selectedItem={type}
+            defaultValue={editFormData.type}
+          />
         </div>
 
         <Input
+          defaultValue={amount}
           divClassName={"col-span-2 "}
           placeHolder={"Amount"}
           id={"amount"}
@@ -41,7 +50,7 @@ export default function AddBudgetForm({callbackFn, editFormData}) {
           type={"number"}
           inpRef={{ ...register("amount", { required: true }) }}
           errors={errors}
-          errorMsg={amount}
+          errorMsg={amountMsg}
         />
         <Input
           divClassName={"col-span-2 "}
@@ -49,31 +58,34 @@ export default function AddBudgetForm({callbackFn, editFormData}) {
           id={"date"}
           name={"date"}
           type={"date"}
+          defaultValue={date}
           inpRef={{ ...register("date", { required: true }) }}
           errors={errors}
-          errorMsg={date}
+          errorMsg={dateMsg}
         />
 
         <Select
           className="col-span-2"
-          defaultValue={"Frequency"}
+          placeHolder={"Frequency"}
           id={"frequency"}
           name={"frequency"}
           options={frequencies}
+          defaultValue={frequency}
           inpRef={{ ...register("frequency", { required: true }) }}
           errors={errors}
-          errorMsg={frequency}
+          errorMsg={frequencyMsg}
         />
 
         <Select
           className="col-span-2"
-          defaultValue={"Category"}
+          placeHolder={"Category"}
           id={"category"}
           name={"category"}
+          defaultValue={category}
           options={categories}
           inpRef={{ ...register("category", { required: true }) }}
           errors={errors}
-          errorMsg={category}
+          errorMsg={categoryMsg}
         />
 
         <TextArea
@@ -83,6 +95,7 @@ export default function AddBudgetForm({callbackFn, editFormData}) {
           name={"note"}
           rows={1}
           inpRef={{ ...register("note") }}
+          defaultValue={note}
         />
 
         <div className="col-span-1 ">

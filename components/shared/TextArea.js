@@ -7,7 +7,8 @@ export default function TextArea({
   rows,
   divClassName,
   placeHolder,
-  inpRef
+  inpRef,
+  defaultValue
 }) {
   return (
     <div className={divClassName || "mb-6"}>
@@ -23,6 +24,7 @@ export default function TextArea({
         rows={rows || 3}
         name={name}
         id={id}
+        defaultValue={defaultValue}
         placeholder={placeHolder}
         className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 
         focus:border-blue-500 block w-full p-2.5"

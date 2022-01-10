@@ -25,11 +25,12 @@ export default function Select({
       <select
         name={name}
         id={id}
+        defaultValue={defaultValue}
         placeholder={placeHolder}
         className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
         {...inpRef}
       >
-        {defaultValue && <option value="">{defaultValue}</option>}
+        {placeHolder && <option value="">{placeHolder}</option>}
         {options.map((cat) => (
           <option key={cat.value} value={cat.value}>
             {cat.label}
