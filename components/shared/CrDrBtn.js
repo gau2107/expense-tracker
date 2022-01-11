@@ -1,8 +1,17 @@
 import ValidationMessage from "./ValidationMesage";
 
-export default function CrDrBtn({ handleClick, selectedItem }) {
+export default function CrDrBtn({ handleClick, selectedItem, className, divClassName, label }) {
   return (
-    <div className="flex items-center justify-center">
+    <div className={divClassName || "mb-6"}>
+    {label && (
+      <label
+        forHtml="date"
+        className="text-md font-medium text-gray-600 block mb-2"
+      >
+        {label}
+      </label>
+    )}
+    <div className={`flex items-center ${className}`}>
       <div
         className="inline-flex shadow-md hover:shadow-lg focus:shadow-lg"
         role="toolbar"
@@ -51,6 +60,7 @@ export default function CrDrBtn({ handleClick, selectedItem }) {
           </button>
         )}
       </div>
+    </div>
     </div>
   );
 }

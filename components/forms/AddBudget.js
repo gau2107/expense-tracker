@@ -6,7 +6,12 @@ import Select from "components/shared/Select";
 import TextArea from "components/shared/TextArea";
 import { categories, frequencies } from "resources/constants";
 import { useForm } from "react-hook-form";
-import { amountMsg, categoryMsg, dateMsg, frequencyMsg } from "resources/messages";
+import {
+  amountMsg,
+  categoryMsg,
+  dateMsg,
+  frequencyMsg,
+} from "resources/messages";
 export default function AddBudgetForm({ callbackFn, editFormData }) {
   const { amount, date, frequency, category, note } = editFormData;
   const {
@@ -35,6 +40,7 @@ export default function AddBudgetForm({ callbackFn, editFormData }) {
       <div className="grid grid-cols-10 gap-2">
         <div className="col-span-1 ">
           <CrDrBtn
+            className={"justify-center"}
             handleClick={handleCrDrClick}
             selectedItem={type}
             defaultValue={editFormData.type}
