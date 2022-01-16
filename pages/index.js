@@ -1,8 +1,9 @@
-import BaseLayout from '../components/layouts/BaseLayout'
+import BaseLayout from "../components/layouts/BaseLayout";
+import { useUser } from "@auth0/nextjs-auth0";
 
 export default function Home() {
-  return (
-    <BaseLayout>
-    </BaseLayout>
-  )
+  const { user, error, isLoading } = useUser();
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>{error.message}</div>;
+  return <BaseLayout user={user}></BaseLayout>;
 }

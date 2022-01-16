@@ -3,7 +3,7 @@ import Head from "next/head";
 import React from "react";
 
 export default function BaseLayout(props) {
-  const { title, cannonical, children } = props;
+  const { title, cannonical, children, user } = props;
   return (
     <>
       <Head>
@@ -27,9 +27,9 @@ export default function BaseLayout(props) {
             href={`${process.env.BASE_URL}${cannonical}`}
           />
         )}
-        <link rel="icon" type="image/ico" href="/static/favicon.ico" />
+        <link rel="icon" type="image/ico" href="/favicon/favicon-32x32.png" />
       </Head>
-      <Header />
+      <Header user={user}/>
       <main>
         <div className="container mx-auto">{children}</div>
       </main>
