@@ -4,7 +4,7 @@ import { navMenus } from "resources/constants";
 export default function Header({ user }) {
   return (
     <>
-      <nav className="flex items-center justify-between flex-wrap bg-black p-6">
+      <nav className="flex items-center justify-between flex-wrap bg-black p-2">
         {/* root nav */}
         <div className="flex items-center flex-shrink-0 text-white mr-6">
         <Link href="/">
