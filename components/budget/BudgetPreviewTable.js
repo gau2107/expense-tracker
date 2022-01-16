@@ -1,7 +1,7 @@
 import DeleteSvg from "components/shared/svg/Delete";
 import EditSvg from "components/shared/svg/Edit";
 import constants, { budgetThs } from "resources/constants";
-export default function BudgetPreviewTable({data, handleEdit, handleDelete}) {
+export default function BudgetPreviewTable({ data, handleEdit, handleDelete }) {
   return (
     <section className="antialiased bg-gray-100 text-gray-600 h-fit px-4">
       <div className="flex flex-col justify-center h-full">
@@ -16,7 +16,17 @@ export default function BudgetPreviewTable({data, handleEdit, handleDelete}) {
                   <tr>
                     {budgetThs.map((th) => (
                       <th key={th} className="p-2 whitespace-nowrap">
-                        <div className={`font-semibold text-${th==='Amount' ? 'right' : th==='Actions' ? 'center' : 'left'}`}>{th}</div>
+                        <div
+                          className={`font-semibold text-${
+                            th === "Amount"
+                              ? "right"
+                              : th === "Actions"
+                              ? "center"
+                              : "left"
+                          }`}
+                        >
+                          {th}
+                        </div>
                       </th>
                     ))}
                   </tr>
@@ -49,18 +59,25 @@ export default function BudgetPreviewTable({data, handleEdit, handleDelete}) {
                       <td className="p-2 whitespace-nowrap">
                         <div className="text-left">{rowData.category}</div>
                       </td>
-                      
+
                       <td className="p-2 whitespace-nowrap">
                         <div className="text-left">{rowData.note}</div>
                       </td>
                       <td className="p-2 whitespace-nowrap">
-                        <div
-                          className={`text-right text-${
-                            rowData.type === "dr" ? "red" : "green"
-                          }-500 font-medium`}
-                        >
-                          {rowData.amount}
-                        </div>
+                        {/* FIXME green font not showing in class ternary operator */}
+                        {rowData.type === "dr" ? (
+                          <div
+                            className={`text-right text-red-500 font-medium`}
+                          >
+                            {rowData.amount}
+                          </div>
+                        ) : (
+                          <div
+                            className={`text-right text-green-500 font-medium`}
+                          >
+                            {rowData.amount}
+                          </div>
+                        )}
                       </td>
                       <td className="p-2 whitespace-nowrap">
                         <div className="text-center">

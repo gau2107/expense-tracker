@@ -6,17 +6,17 @@ export default function Header({ user }) {
     <>
       <nav className="flex items-center justify-between flex-wrap bg-black p-2">
         {/* root nav */}
-        <div className="flex items-center flex-shrink-0 text-white mr-6">
-        <Link href="/">
-          <a className="mr-4">
-          <Image
-            className="mr-6"
-            src="/favicon/favicon.ico"
-            width={48}
-            height={48}
-            alt="Logo"
-          />
-          </a>
+        <div className="flex items-center flex-shrink-0 text-white mr-4 ml-4">
+          <Link href="/">
+            <a className="mr-4">
+              <Image
+                className="mr-6"
+                src="/favicon/favicon.ico"
+                width={48}
+                height={48}
+                alt="Logo"
+              />
+            </a>
           </Link>
         </div>
 
@@ -46,7 +46,7 @@ export default function Header({ user }) {
               </Link>
             ))}
           </div>
-          <div>
+          <div className="mr-4">
             <Link href={"api/auth/login"}>
               <a className="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-black hover:bg-white mt-4 lg:mt-0">
                 {user ? "Logout" : "Login"}
