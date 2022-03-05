@@ -9,6 +9,8 @@
   },
   "dependencies": {
     "@auth0/nextjs-auth0": "^1.7.0",
+    "@fullcalendar/daygrid": "^5.10.1",
+    "@fullcalendar/react": "^5.10.1",
     "dayjs": "^1.10.7",
     "next": "12.0.7",
     "react": "17.0.2",
