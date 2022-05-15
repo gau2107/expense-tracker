@@ -4,6 +4,7 @@ import BaseLayout from "components/layouts/BaseLayout";
 import Button from "components/shared/Button";
 import Heading from "components/shared/Heading";
 import { useState } from "react";
+import Swal from "sweetalert2";
 import Data from "/resources/data.json";
 
 export default function Add() {
@@ -19,13 +20,26 @@ export default function Add() {
       setData([...tempData]);
     } else setData([...data, formData]);
     setEditFormData({});
-    debugger
+    debugger;
   };
 
   const handleDelete = (id) => {
-    let tempData = [...data];
-    tempData.splice(id, 1);
-    setData(tempData);
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        let tempData = [...data];
+        tempData.splice(id, 1);
+        setData(tempData);
+        Swal.fire("Deleted!", "Your file has been deleted.", "success");
+      }
+    });
   };
 
   const handleEdit = (data) => setEditFormData({ ...data });
