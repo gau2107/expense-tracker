@@ -37,7 +37,7 @@ export default function Add() {
         let tempData = [...data];
         tempData.splice(id, 1);
         setData(tempData);
-        Swal.fire("Deleted!", "Your file has been deleted.", "success");
+        Swal.fire("Deleted!", "Your budget has been deleted.", "success");
       }
     });
   };
