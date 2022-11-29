@@ -28,9 +28,7 @@ export default function FourOhFour() {
           </p>
 
           <Link href={"/"}>
-            <a>
-              <Button label={"Back to home"} type={"button"} />
-            </a>
+            <Button label={"Back to home"} type={"button"} />
           </Link>
         </div>
       </div>
