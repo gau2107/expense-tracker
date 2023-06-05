@@ -80,7 +80,7 @@ export default function BudgetPreviewTable({ data, handleEdit, handleDelete }) {
                         )}
                       </td>
                       <td className="p-2 whitespace-nowrap">
-                        <div className="text-center">
+                        <div className="text-center flex">
                           <EditSvg onClick={() => handleEdit(rowData)} />
                           <DeleteSvg onClick={() => handleDelete(key)} />
                         </div>

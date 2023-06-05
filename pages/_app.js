@@ -1,7 +1,6 @@
 import "../styles/globals.css";
 import NextNProgress from "nextjs-progressbar";
 import firebase from "firebase/compat/app";
-import { getMessaging } from "firebase/messaging";
 import { useEffect } from "react";
 function MyApp({ Component, pageProps }) {
   useEffect(() => {
