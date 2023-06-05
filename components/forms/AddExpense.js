@@ -1,0 +1,85 @@
+import { useState, useEffect } from "react";
+import Button from "components/shared/Button";
+import CrDrBtn from "components/shared/CrDrBtn";
+import Input from "components/shared/Input";
+import Select from "components/shared/Select";
+import TextArea from "components/shared/TextArea";
+import { categories, frequencies } from "resources/constants";
+import { useForm } from "react-hook-form";
+import {
+  amountMsg,
+  categoryMsg,
+  dateMsg,
+  frequencyMsg,
+} from "resources/messages";
+export default function AddExpenseForm() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const [type, setType] = useState("");
+  const handleCrDrClick = (value) => setType(value);
+
+  const onSubmit = (data, ev) => {
+    if (!type.length) return false;
+    data = { ...data, type: type };
+    setType("");
+    ev.target.reset();
+  };
+
+  return (
+    <form className="mt-4" onSubmit={handleSubmit(onSubmit)}>
+      <div className="mb-6 ">
+        <CrDrBtn label={'Type'} handleClick={handleCrDrClick} selectedItem={type} />
+      </div>
+
+      <Input
+        divClassName={"mb-6 "}
+        label={"Amount"}
+        id={"amount"}
+        name={"amount"}
+        type={"number"}
+        inpRef={{ ...register("amount", { required: true }) }}
+        errors={errors}
+        errorMsg={amountMsg}
+      />
+      <Input
+        divClassName={"mb-6"}
+        label={"Date"}
+        id={"date"}
+        name={"date"}
+        type={"date"}
+        inpRef={{ ...register("date", { required: true }) }}
+        errors={errors}
+        errorMsg={dateMsg}
+      />
+
+      <Select
+        className="mb-6"
+        label={"Category"}
+        id={"category"}
+        name={"category"}
+        options={categories}
+        inpRef={{ ...register("category", { required: true }) }}
+        errors={errors}
+        errorMsg={categoryMsg}
+      />
+
+      <TextArea
+        divClassName={"mb-6"}
+        label={"Note"}
+        id={"note"}
+        name={"note"}
+        rows={2}
+        inpRef={{ ...register("note") }}
+      />
+
+      <div className="col-span-1 ">
+        <Button label={"Save & Add New"} type={"submit"} />
+        <Button label={"Save & View"} type={"submit"} />
+      </div>
+    </form>
+  );
+}
