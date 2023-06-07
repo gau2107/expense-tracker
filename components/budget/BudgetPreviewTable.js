@@ -60,7 +60,7 @@ export default function BudgetPreviewTable({ data, handleEdit, handleDelete }) {
                         <div className="text-left">{rowData.category}</div>
                       </td>
 
-                      <td className="p-2 whitespace-nowrap">
+                      <td className="p-2 max-w-xs">
                         <div className="text-left">{rowData.note}</div>
                       </td>
                       <td className="p-2 whitespace-nowrap">
@@ -80,7 +80,7 @@ export default function BudgetPreviewTable({ data, handleEdit, handleDelete }) {
                         )}
                       </td>
                       <td className="p-2 whitespace-nowrap">
-                        <div className="text-center flex">
+                        <div className="justify-center flex">
                           <EditSvg onClick={() => handleEdit(rowData)} />
                           <DeleteSvg onClick={() => handleDelete(key)} />
                         </div>

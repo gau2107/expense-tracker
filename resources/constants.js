@@ -7,7 +7,7 @@ module.exports = Object.freeze({
     { value: "Monthly", label: "Monthly" },
     { value: "Quarterly", label: "Quarterly" },
     { value: "Semi-annually", label: "Semi Annually" },
-    { value: "Annually", label: "Annually" }
+    { value: "Annually", label: "Annually" },
   ],
   categories: [
     { value: "Salary", label: "Salary" },
@@ -20,5 +20,14 @@ module.exports = Object.freeze({
     { title: "Add Expense", link: "/expense/add" },
     { title: "Expenses", link: "/expense" },
   ],
-  budgetThs: ["#", "Cr", "Date", "Frequency", "Category", "Note", "Amount", "Actions"],
+  budgetThs: [
+    "#",
+    "Cr",
+    "Date",
+    "Frequency",
+    "Category",
+    "Note",
+    "Amount",
+    "Actions",
+  ],
 });
