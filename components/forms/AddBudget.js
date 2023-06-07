@@ -13,10 +13,10 @@ import {
   frequencyMsg,
 } from "resources/messages";
 export default function AddBudgetForm({ callbackFn, editFormData }) {
-  const { amount, date, frequency, category, note } = editFormData;
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
 
@@ -24,15 +24,22 @@ export default function AddBudgetForm({ callbackFn, editFormData }) {
   const handleCrDrClick = (value) => setType(value);
 
   useEffect(() => {
+    reset({ ...editFormData });
     setType(editFormData.type);
-  }, [editFormData.type]);
+  }, [editFormData]);
 
   const onSubmit = (data, ev) => {
-    if (!type.length) return false;
+    if (!type || !type.length) return false;
     data = { ...data, type: type, id: editFormData?.id };
     callbackFn(data);
     setType("");
-    ev.target.reset();
+    reset({
+      amount: null,
+      date: null,
+      frequency: null,
+      category: null,
+      note: null,
+    });
   };
 
   return (
@@ -43,12 +50,10 @@ export default function AddBudgetForm({ callbackFn, editFormData }) {
             className={"justify-center"}
             handleClick={handleCrDrClick}
             selectedItem={type}
-            defaultValue={editFormData.type}
           />
         </div>
 
         <Input
-          defaultValue={amount}
           divClassName={"col-span-2 "}
           placeHolder={"Amount"}
           id={"amount"}
@@ -64,7 +69,6 @@ export default function AddBudgetForm({ callbackFn, editFormData }) {
           id={"date"}
           name={"date"}
           type={"date"}
-          defaultValue={date}
           inpRef={{ ...register("date", { required: true }) }}
           errors={errors}
           errorMsg={dateMsg}
@@ -76,7 +80,6 @@ export default function AddBudgetForm({ callbackFn, editFormData }) {
           id={"frequency"}
           name={"frequency"}
           options={frequencies}
-          defaultValue={frequency}
           inpRef={{ ...register("frequency", { required: true }) }}
           errors={errors}
           errorMsg={frequencyMsg}
@@ -87,7 +90,6 @@ export default function AddBudgetForm({ callbackFn, editFormData }) {
           placeHolder={"Category"}
           id={"category"}
           name={"category"}
-          defaultValue={category}
           options={categories}
           inpRef={{ ...register("category", { required: true }) }}
           errors={errors}
@@ -101,7 +103,6 @@ export default function AddBudgetForm({ callbackFn, editFormData }) {
           name={"note"}
           rows={1}
           inpRef={{ ...register("note") }}
-          defaultValue={note}
         />
 
         <div className="col-span-1 ">

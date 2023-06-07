@@ -5,10 +5,9 @@ import Button from "components/shared/Button";
 import Heading from "components/shared/Heading";
 import { useState } from "react";
 import Swal from "sweetalert2";
-import Data from "/resources/data.json";
 
 export default function Add() {
-  const [data, setData] = useState([...Data.data]);
+  const [data, setData] = useState([]);
   const [editFormData, setEditFormData] = useState({});
 
   const addData = (formData) => {
@@ -18,9 +17,8 @@ export default function Add() {
         if (row.id === formData.id) tempData[index] = formData;
       });
       setData([...tempData]);
-    } else setData([...data, formData]);
+    } else setData([...data, { ...formData, id: data.length + 1 }]);
     setEditFormData({});
-    debugger;
   };
 
   const handleDelete = (id) => {
