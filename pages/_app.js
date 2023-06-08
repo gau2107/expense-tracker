@@ -1,7 +1,7 @@
 import "../styles/globals.css";
 import NextNProgress from "nextjs-progressbar";
-import firebase from "firebase/compat/app";
 import { useEffect } from "react";
+import { app } from "../firebase/clientApp";
 function MyApp({ Component, pageProps }) {
   useEffect(() => {
     requestPermission();
@@ -15,11 +15,6 @@ function MyApp({ Component, pageProps }) {
       }
     });
   }
-  const config = {
-    apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
-    authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
-  };
-  const app = firebase.initializeApp(config);
 
   return (
     <>

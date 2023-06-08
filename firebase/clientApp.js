@@ -1,5 +1,4 @@
-import { initializeApp } from 'firebase/app';
-
+import firebase from "firebase/compat/app";
 const clientCredentials = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
   authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
@@ -8,9 +7,6 @@ const clientCredentials = {
   messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
-
-if (!Firebase.apps.length) {
-  Firebase.initializeApp(clientCredentials);
+if (!firebase.apps.length) {
+  const app = firebase.initializeApp(clientCredentials);
 }
-
-const app = initializeApp(firebaseConfig);
