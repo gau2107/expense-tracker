@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import useAuthStore from "store/store";
 import { useRouter } from "next/router";
 import Image from "next/image";
+import StyledFirebaseAuth from "components/StyledFirebaseAuth";
 
 export default function Login() {
   const router = useRouter();
