@@ -92,7 +92,7 @@ export default function AddBudgetForm({ callbackFn, editFormData, categoryList }
           placeHolder={"Category"}
           id={"category"}
           name={"category"}
-          options={categories}
+          options={categoryList}
           inpRef={{ ...register("category", { required: true }) }}
           errors={errors}
           errorMsg={categoryMsg}

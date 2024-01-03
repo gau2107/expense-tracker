@@ -33,9 +33,9 @@ export default function Select({
         {...inpRef}
       >
         {placeHolder && <option value="">{placeHolder}</option>}
-        {options.map((cat) => (
-          <option key={cat[valueKey]} value={cat[valueKey]}>
-            {cat[labelKey]}
+        {options.map((option) => (
+          <option key={option[valueKey]} value={option[valueKey]}>
+            {option[labelKey]}
           </option>
         ))}
       </select>
