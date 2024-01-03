@@ -12,7 +12,7 @@ import {
   dateMsg,
   frequencyMsg,
 } from "resources/messages";
-export default function AddBudgetForm({ callbackFn, editFormData }) {
+export default function AddBudgetForm({ callbackFn, editFormData, categoryList }) {
   const {
     register,
     handleSubmit,
@@ -83,6 +83,8 @@ export default function AddBudgetForm({ callbackFn, editFormData }) {
           inpRef={{ ...register("frequency", { required: true }) }}
           errors={errors}
           errorMsg={frequencyMsg}
+          valueKey={'value'}
+          labelKey={'label'}
         />
 
         <Select
@@ -94,6 +96,8 @@ export default function AddBudgetForm({ callbackFn, editFormData }) {
           inpRef={{ ...register("category", { required: true }) }}
           errors={errors}
           errorMsg={categoryMsg}
+          valueKey={'id'}
+          labelKey={'name'}
         />
 
         <TextArea

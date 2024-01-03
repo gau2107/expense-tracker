@@ -6,7 +6,8 @@ import Heading from "components/shared/Heading";
 import { useState } from "react";
 import Swal from "sweetalert2";
 
-export default function Add() {
+export default function Add({ categoryList }) {
+  console.log(categoryList);
   const [data, setData] = useState([]);
   const [editFormData, setEditFormData] = useState({});
 
@@ -46,7 +47,7 @@ export default function Add() {
     <BaseLayout>
       <div className=" mx-0">
         <Heading heading={`Add Recurring Budget`} />
-        <AddBudgetForm callbackFn={addData} editFormData={editFormData} />
+        <AddBudgetForm callbackFn={addData} editFormData={editFormData} categoryList={categoryList} />
         <div className="flex flex-col">
           <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
             <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
@@ -67,3 +68,9 @@ export default function Add() {
     </BaseLayout>
   );
 }
+
+export const getServerSideProps = (async () => {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API_BASE_URL}categories`)
+  const data = await res.json();
+  return { props: { categoryList: data } }
+})

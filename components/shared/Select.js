@@ -10,7 +10,9 @@ export default function Select({
   options,
   defaultValue,
   inpRef,
-  errorMsg
+  errorMsg,
+  valueKey,
+  labelKey
 }) {
   return (
     <div className={divClassName || "mb-6"}>
@@ -32,8 +34,8 @@ export default function Select({
       >
         {placeHolder && <option value="">{placeHolder}</option>}
         {options.map((cat) => (
-          <option key={cat.value} value={cat.value}>
-            {cat.label}
+          <option key={cat[valueKey]} value={cat[valueKey]}>
+            {cat[labelKey]}
           </option>
         ))}
       </select>
