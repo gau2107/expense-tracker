@@ -9,7 +9,6 @@ import {
   amountMsg,
   categoryMsg,
   dateMsg,
-  frequencyMsg,
 } from "resources/messages";
 export default function AddExpenseForm({ categoryList }) {
   const {
@@ -24,6 +23,12 @@ export default function AddExpenseForm({ categoryList }) {
   const onSubmit = (data, ev) => {
     if (!type.length) return false;
     data = { ...data, type: type };
+    fetch(`${process.env.NEXT_PUBLIC_BACKEND_API_BASE_URL}/expense`, {
+      method: 'post', body: data, headers: {
+        "Content-type": "application/json; charset=UTF-8"
+      }
+    }).then(response => response.json())
+      .then(json => console.log(json));
     setType("");
     ev.target.reset();
   };

@@ -5,7 +5,6 @@ export default function CrDrBtn({ handleClick, selectedItem, className, divClass
     <div className={divClassName || "mb-6"}>
     {label && (
       <label
-        forHtml="date"
         className="text-md font-medium text-gray-600 block mb-2"
       >
         {label}

@@ -16,7 +16,7 @@ export default function Input({
     <div className={divClassName || "mb-6"}>
       {label && (
         <label
-          forHtml="date"
+          htmlFor={id}
           className="text-md font-medium text-gray-600 block mb-2"
         >
           {label}
