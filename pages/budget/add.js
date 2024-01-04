@@ -7,7 +7,6 @@ import { useState } from "react";
 import Swal from "sweetalert2";
 
 export default function Add({ categoryList }) {
-  console.log(categoryList);
   const [data, setData] = useState([]);
   const [editFormData, setEditFormData] = useState({});
 
@@ -70,7 +69,7 @@ export default function Add({ categoryList }) {
 }
 
 export const getServerSideProps = (async () => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API_BASE_URL}categories`)
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API_BASE_URL}/categories`)
   const data = await res.json();
   return { props: { categoryList: data } }
 })

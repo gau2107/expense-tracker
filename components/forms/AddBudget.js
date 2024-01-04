@@ -4,7 +4,7 @@ import CrDrBtn from "components/shared/CrDrBtn";
 import Input from "components/shared/Input";
 import Select from "components/shared/Select";
 import TextArea from "components/shared/TextArea";
-import { categories, frequencies } from "resources/constants";
+import { frequencies } from "resources/constants";
 import { useForm } from "react-hook-form";
 import {
   amountMsg,

@@ -4,7 +4,6 @@ import CrDrBtn from "components/shared/CrDrBtn";
 import Input from "components/shared/Input";
 import Select from "components/shared/Select";
 import TextArea from "components/shared/TextArea";
-import { categories, frequencies } from "resources/constants";
 import { useForm } from "react-hook-form";
 import {
   amountMsg,
@@ -12,7 +11,7 @@ import {
   dateMsg,
   frequencyMsg,
 } from "resources/messages";
-export default function AddExpenseForm() {
+export default function AddExpenseForm({ categoryList }) {
   const {
     register,
     handleSubmit,
@@ -61,7 +60,9 @@ export default function AddExpenseForm() {
         label={"Category"}
         id={"category"}
         name={"category"}
-        options={categories}
+        options={categoryList}
+        valueKey={'id'}
+        labelKey={'name'}
         inpRef={{ ...register("category", { required: true }) }}
         errors={errors}
         errorMsg={categoryMsg}
