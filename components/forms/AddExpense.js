@@ -22,9 +22,9 @@ export default function AddExpenseForm({ categoryList }) {
 
   const onSubmit = (data, ev) => {
     if (!type.length) return false;
-    data = { ...data, type: type };
+    data = { ...data, type: type, user_id: 1 };
     fetch(`${process.env.NEXT_PUBLIC_BACKEND_API_BASE_URL}/expense`, {
-      method: 'post', body: data, headers: {
+      method: 'post', body: JSON.stringify(data), headers: {
         "Content-type": "application/json; charset=UTF-8"
       }
     }).then(response => response.json())
@@ -63,12 +63,12 @@ export default function AddExpenseForm({ categoryList }) {
       <Select
         className="mb-6"
         label={"Category"}
-        id={"category"}
-        name={"category"}
+        id={"category_id"}
+        name={"category_id"}
         options={categoryList}
         valueKey={'id'}
         labelKey={'name'}
-        inpRef={{ ...register("category", { required: true }) }}
+        inpRef={{ ...register("category_id", { required: true }) }}
         errors={errors}
         errorMsg={categoryMsg}
       />
@@ -76,10 +76,10 @@ export default function AddExpenseForm({ categoryList }) {
       <TextArea
         divClassName={"mb-6"}
         label={"Note"}
-        id={"note"}
-        name={"note"}
+        id={"description"}
+        name={"description"}
         rows={2}
-        inpRef={{ ...register("note") }}
+        inpRef={{ ...register("description") }}
       />
 
       <div className="col-span-1 ">
