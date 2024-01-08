@@ -1,5 +1,5 @@
-import Data from "/resources/data.json";
 import Constants from "/resources/constants.js";
+import dayjs from "dayjs";
 
 export default function ExpenseTable({ list }) {
   return (
@@ -45,7 +45,7 @@ export default function ExpenseTable({ list }) {
                         </div>
                       </td>
                       <td className="p-2 whitespace-nowrap">
-                        <div className="text-left">{data.date}</div>
+                        <div className="text-left">{dayjs(data.date).format('ddd DD MMM YYYY')}</div>
                       </td>
                       <td className="p-2 whitespace-nowrap">
                         <div className="text-left">
