@@ -1,7 +1,7 @@
 import Constants from "/resources/constants.js";
 import dayjs from "dayjs";
 
-export default function ExpenseTable({ list }) {
+export default function ExpenseTable({ list, total_amount: totalAmount, count }) {
   return (
     <section className="antialiased bg-gray-100 text-gray-600 h-screen px-4">
       <div className="flex flex-col justify-center h-full">
@@ -63,6 +63,13 @@ export default function ExpenseTable({ list }) {
                       </td>
                     </tr>
                   ))}
+                  <tr>
+                    <td colSpan={6} className="p-2 uppercase text-500 font-medium text-right">
+                      <span className="pr-10">Total amount:</span>
+                      <span className="text-red-500">
+                        {totalAmount}</span>
+                    </td>
+                  </tr>
                 </tbody>
               </table>
             </div>
