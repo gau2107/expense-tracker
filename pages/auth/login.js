@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from "react";
-import firebase from "firebase/compat/app";
-import "firebase/compat/auth";
 import useAuthStore from "store/store";
 import { useRouter } from "next/router";
 import Image from "next/image";
-import StyledFirebaseAuth from "components/StyledFirebaseAuth";
 
 export default function Login() {
   const router = useRouter();
@@ -12,31 +9,14 @@ export default function Login() {
   const toggle = useAuthStore((state) => state.toggleIsAuthenticated);
   const [isAuthenticated, setIsAuthenticated] = useState();
 
-  const uiConfig = {
-    signInFlow: "popup",
-    signInOptions: [
-      firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-      firebase.auth.EmailAuthProvider.PROVIDER_ID,
-    ],
-    callbacks: {
-      // Avoid redirects after sign-in.
-      signInSuccessWithAuthResult: () => false,
-    },
-  };
+  
 
   useEffect(() => {
     if (isAuthenticated) router.push("/");
   }, []);
 
   useEffect(() => {
-    const unregisterAuthObserver = firebase
-      .auth()
-      .onAuthStateChanged((user) => {
-        toggle(!!user);
-
-        if (!!user) router.push("/");
-      });
-    return () => unregisterAuthObserver(); // Make sure we un-register Firebase observers when the component unmounts.
+   
   }, []);
 
   useEffect(() => {
@@ -70,12 +50,7 @@ export default function Login() {
           alt="Logo"
         />
       </div>
-      {!isAuthenticated && (
-        <StyledFirebaseAuth
-          uiConfig={uiConfig}
-          firebaseAuth={firebase.auth()}
-        />
-      )}
+     
     </div>
   );
 }

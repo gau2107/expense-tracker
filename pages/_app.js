@@ -1,7 +1,6 @@
 import "../styles/globals.css";
 import NextNProgress from "nextjs-progressbar";
 import { useEffect } from "react";
-import { app } from "../firebase/clientApp";
 function MyApp({ Component, pageProps }) {
   useEffect(() => {
     requestPermission();

@@ -1,19 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import { navMenus } from "resources/constants";
-import { getAuth, signOut } from "firebase/auth";
 import useAuthStore from "store/store";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 export default function Header({}) {
-  const authStoreVal = useAuthStore((state) => state.isAuthenticated);
   const toggle = useAuthStore((state) => state.toggleIsAuthenticated);
   const [isAuthenticated, setIsAuthenticated] = useState();
 
-  useEffect(() => {
-    setIsAuthenticated(authStoreVal);
-  }, [authStoreVal]);
-  const auth = getAuth();
 
   const router = useRouter();
 
