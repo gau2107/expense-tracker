@@ -1,5 +1,6 @@
 import Constants from "/resources/constants.js";
 import dayjs from "dayjs";
+import Image from 'next/image';
 
 export default function ExpenseTable({ list, total_amount: totalAmount, count }) {
   return (
@@ -32,6 +33,9 @@ export default function ExpenseTable({ list, total_amount: totalAmount, count })
                     <th className="p-2 whitespace-nowrap">
                       <div className="font-semibold text-right">Amount</div>
                     </th>
+                    <th className="p-2 whitespace-nowrap">
+                      <div className="font-semibold text-center">Action</div>
+                    </th>
                   </tr>
                 </thead>
                 <tbody className="text-sm divide-y divide-gray-100">
@@ -60,6 +64,12 @@ export default function ExpenseTable({ list, total_amount: totalAmount, count })
                       </td>
                       <td className="p-2 whitespace-nowrap">
                         <div className={`text-right text-${data.type === 'dr' ? 'red' : 'green'}-500 font-medium`}>{data.amount}</div>
+                      </td>
+                      <td className="p-2">
+                        <div className={`justify-center flex`}>
+                          <Image className="mr-2 cursor-pointer" src="/assets/edit.svg" alt="Edit" width={24} height={24} />
+                          <Image className="ml-2 cursor-pointer" src="/assets/trash.svg" alt="Delete" width={24} height={24} />
+                        </div>
                       </td>
                     </tr>
                   ))}
