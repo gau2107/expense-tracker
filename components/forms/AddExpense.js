@@ -5,11 +5,15 @@ import Input from "components/shared/Input";
 import Select from "components/shared/Select";
 import TextArea from "components/shared/TextArea";
 import { useForm } from "react-hook-form";
+import { useRouter } from 'next/router';
+import Swal from "sweetalert2";
+
 import {
   amountMsg,
   categoryMsg,
   dateMsg,
 } from "resources/messages";
+
 export default function AddExpenseForm({ categoryList }) {
   const {
     register,
@@ -17,7 +21,15 @@ export default function AddExpenseForm({ categoryList }) {
     formState: { errors },
   } = useForm();
 
+  const router = useRouter();
   const [type, setType] = useState("");
+  const [isRedirect, setIsRedirect] = useState(false);
+
+  useEffect(() => {
+    if (isRedirect) handleSubmit(onSubmit)();
+  }, [isRedirect]);
+
+
   const handleCrDrClick = (value) => setType(value);
 
   const onSubmit = (data, ev) => {
@@ -27,10 +39,22 @@ export default function AddExpenseForm({ categoryList }) {
       method: 'post', body: JSON.stringify(data), headers: {
         "Content-type": "application/json; charset=UTF-8"
       }
-    }).then(response => response.json())
-      .then(json => console.log(json));
-    setType("");
-    ev.target.reset();
+    }).then(response => {
+      if (ev) ev.target.reset();
+      setType("");
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        toast: true,
+        title: "Expense saved successfully",
+        showConfirmButton: false,
+        heightAuto: false,
+        timer: 1500
+      }).then((result) => {
+        if (isRedirect) router.push('/expense')
+      });
+    });
+
   };
 
   return (
@@ -84,7 +108,7 @@ export default function AddExpenseForm({ categoryList }) {
 
       <div className="col-span-1 ">
         <Button label={"Save & Add New"} type={"submit"} />
-        <Button label={"Save & View"} type={"submit"} />
+        <Button label={"Save & View"} type={"button"} onClick={() => setIsRedirect(true)} />
       </div>
     </form>
   );
