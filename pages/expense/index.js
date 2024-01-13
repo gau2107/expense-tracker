@@ -1,12 +1,17 @@
 import ExpenseTable from "components/ExpenseTable";
 import BaseLayout from "components/layouts/BaseLayout";
 import Heading from "components/shared/Heading";
+import { useRouter } from 'next/router';
 
 export default function Expenses({ serverData }) {
+  const router = useRouter();
+
+  const handleDeleteApiCallback = () => router.replace(router.asPath);
+  
   return (
     <BaseLayout>
       <Heading heading={"Expense"} />
-      <ExpenseTable {...serverData} />
+      <ExpenseTable {...serverData} handleDeleteApiCallback={() => handleDeleteApiCallback()} />
     </BaseLayout>
   );
 }

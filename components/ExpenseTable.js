@@ -1,8 +1,39 @@
 import Constants from "/resources/constants.js";
 import dayjs from "dayjs";
 import Image from 'next/image';
+import Swal from "sweetalert2";
 
-export default function ExpenseTable({ list, total_amount: totalAmount, total_debit_amount: totalDebitAmount }) {
+export default function ExpenseTable({ list, total_amount: totalAmount, total_debit_amount: totalDebitAmount, handleDeleteApiCallback }) {
+  function handleDeleteClick(id) {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        handleDeleteApiCall(id);
+      }
+    });
+  }
+
+  function handleDeleteApiCall(id) {
+    fetch(`${process.env.NEXT_PUBLIC_BACKEND_API_BASE_URL}/expense/${id}`, {
+      method: 'delete', headers: {
+        "Content-type": "application/json; charset=UTF-8"
+      }
+    }).then(response => {
+      handleDeleteApiCallback();
+      Swal.fire({
+        title: "Deleted!",
+        text: "Your file has been deleted.",
+        icon: "success"
+      });
+    });
+  }
   return (
     <section >
       <header className="px-5 py-4 border-b border-gray-100">
@@ -37,7 +68,7 @@ export default function ExpenseTable({ list, total_amount: totalAmount, total_de
               </tr>
             </thead>
             <tbody className="text-sm divide-y divide-gray-100">
-              {list.map((data, key) => (
+              {list.length > 0 && list.map((data, key) => (
                 <tr key={key}>
                   <td className="p-2 whitespace-nowrap">
                     <div className="flex items-center">
@@ -66,7 +97,7 @@ export default function ExpenseTable({ list, total_amount: totalAmount, total_de
                   <td className="p-2">
                     <div className={`justify-center flex`}>
                       <Image className="mr-2 cursor-pointer" src="/assets/edit.svg" alt="Edit" width={24} height={24} />
-                      <Image className="ml-2 cursor-pointer" src="/assets/trash.svg" alt="Delete" width={24} height={24} />
+                      <Image className="ml-2 cursor-pointer" src="/assets/trash.svg" alt="Delete" width={24} height={24} onClick={() => handleDeleteClick(data.id)} />
                     </div>
                   </td>
                 </tr>
