@@ -14,16 +14,24 @@ import {
   dateMsg,
 } from "resources/messages";
 
-export default function AddExpenseForm({ categoryList }) {
+export default function AddExpenseForm({ categoryList, editData }) {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
 
   const router = useRouter();
   const [type, setType] = useState("");
   const [isRedirect, setIsRedirect] = useState(false);
+
+  useEffect(() => {
+    if (editData && editData.type) {
+      setType(editData.type);
+      reset({ ...editData });
+    }
+  }, [editData])
 
   useEffect(() => {
     if (isRedirect) handleSubmit(onSubmit)();
@@ -35,8 +43,8 @@ export default function AddExpenseForm({ categoryList }) {
   const onSubmit = (data, ev) => {
     if (!type.length) return false;
     data = { ...data, type: type, user_id: 1 };
-    fetch(`${process.env.NEXT_PUBLIC_BACKEND_API_BASE_URL}/expense`, {
-      method: 'post', body: JSON.stringify(data), headers: {
+    fetch(`${process.env.NEXT_PUBLIC_BACKEND_API_BASE_URL}/expense${editData?.id ? '/' + editData.id : ''}`, {
+      method: editData?.id ? 'put' : 'post', body: JSON.stringify(data), headers: {
         "Content-type": "application/json; charset=UTF-8"
       }
     }).then(response => {
@@ -51,7 +59,7 @@ export default function AddExpenseForm({ categoryList }) {
         heightAuto: false,
         timer: 1500
       }).then((result) => {
-        if (isRedirect) router.push('/expense')
+        if (isRedirect) router.push('/expense');
       });
     });
 
@@ -107,8 +115,17 @@ export default function AddExpenseForm({ categoryList }) {
       />
 
       <div className="col-span-1 ">
-        <Button label={"Save & Add New"} type={"submit"} />
-        <Button label={"Save & View"} type={"button"} onClick={() => setIsRedirect(true)} />
+        {!editData ?
+          <>
+            <Button label={"Save & Add New"} type={"submit"} />
+            <Button label={"Save & View"} type={"button"} onClick={() => setIsRedirect(true)} />
+          </> :
+          <>
+            <Button label={"Cancel"} type={"button"} color={"red"} onClick={() => router.push('/expense')} />
+            <Button label={"Update"} type={"button"} onClick={() => setIsRedirect(true)} />
+          </>
+        }
+
       </div>
     </form>
   );

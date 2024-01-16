@@ -109,13 +109,13 @@ export default function ExpenseTable({ list, total_amount: totalAmount, total_de
               ))}
               <tr>
                 <td colSpan={6} className="p-2 uppercase text-500 font-medium text-right">
-                  <span className="pr-10">Total debit amount:</span>
+                  <span className="pr-10">Total expenses:</span>
                   <span className="text-red-500">
                     {totalDebitAmount}</span>
                 </td>
               </tr> <tr>
                 <td colSpan={6} className="p-2 uppercase text-500 font-medium text-right">
-                  <span className="pr-10">Total amount:</span>
+                  <span className="pr-10">Total savings:</span>
                   <span className="text-green-500">
                     {totalAmount}</span>
                 </td>
