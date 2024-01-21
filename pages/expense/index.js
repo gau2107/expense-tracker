@@ -1,11 +1,12 @@
 import ExpenseTable from "components/ExpenseTable";
-import SearchBar from "components/forms/SearchBar";
+import SearchBar from "components/common/SearchBar";
 import BaseLayout from "components/layouts/BaseLayout";
 import Heading from "components/shared/Heading";
 import { useRouter } from 'next/router';
 import { isEmpty } from "radash";
 import queryString from 'query-string';
 import { useEffect, useState } from "react";
+import MonthFilter from "components/MonthFilter";
 
 export default function Expenses({ serverData }) {
   const router = useRouter();
@@ -18,6 +19,7 @@ export default function Expenses({ serverData }) {
   }, [filters]);
 
   const getData = async () => {
+    console.log("month", filters)
     const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API_BASE_URL}/expense?${queryString.stringify(filters)}`)
     const data = await res.json();
     setData({ ...data });
@@ -29,6 +31,7 @@ export default function Expenses({ serverData }) {
     <BaseLayout>
       <Heading heading={"Expense"} />
       <SearchBar onChange={(value) => setFilters({ ...filters, query: value })} value={filters.query} />
+      <MonthFilter onChange={(value) => setFilters({ ...filters, month: value })} />
       <ExpenseTable {...data} handleDeleteApiCallback={() => handleDeleteApiCallback()} />
     </BaseLayout>
   );
