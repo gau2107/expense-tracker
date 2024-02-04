@@ -19,7 +19,6 @@ export default function Expenses({ serverData }) {
   }, [filters]);
 
   const getData = async () => {
-    console.log("month", filters)
     const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API_BASE_URL}/expense?${queryString.stringify(filters)}`)
     const data = await res.json();
     setData({ ...data });
