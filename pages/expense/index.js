@@ -7,10 +7,13 @@ import { isEmpty } from "radash";
 import queryString from 'query-string';
 import { useEffect, useState } from "react";
 import MonthFilter from "components/MonthFilter";
+import dayjs from "dayjs";
 
 export default function Expenses({ serverData }) {
+
+  const curMonth = dayjs().format('YYYY-MM');
   const router = useRouter();
-  const [filters, setFilters] = useState({});
+  const [filters, setFilters] = useState({ month: curMonth });
   const [data, setData] = useState(serverData);
 
   useEffect(() => {
@@ -29,8 +32,11 @@ export default function Expenses({ serverData }) {
   return (
     <BaseLayout>
       <Heading heading={"Expense"} />
-      <SearchBar onChange={(value) => setFilters({ ...filters, query: value })} value={filters.query} />
-      <MonthFilter onChange={(value) => setFilters({ ...filters, month: value })} />
+      <div className="flex">
+        <SearchBar onChange={(value) => setFilters({ ...filters, query: value })} value={filters.query} />
+        <MonthFilter onChange={(value) => setFilters({ ...filters, month: value })} value={filters.month} />
+      </div>
+
       <ExpenseTable {...data} handleDeleteApiCallback={() => handleDeleteApiCallback()} />
     </BaseLayout>
   );
