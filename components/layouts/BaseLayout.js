@@ -29,7 +29,7 @@ export default function BaseLayout(props) {
         )}
         <link rel="icon" type="image/ico" href="/favicon/favicon-32x32.png" />
       </Head>
-      <Header user={user}/>
+      <Header user={user} />
       <main>
         <div className="container mx-auto">{children}</div>
       </main>

@@ -7,4 +7,11 @@ const useAuthStore = create(
   }))
 );
 
-export default useAuthStore;
+const useCategoryStore = create(
+  persist((set, get) => ({
+    categories: [],
+    setCategories: (arr) => set(() => ({ categories: arr })),
+  }))
+);
+
+export default useCategoryStore;

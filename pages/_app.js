@@ -1,10 +1,19 @@
 import "../styles/globals.css";
 import NextNProgress from "nextjs-progressbar";
 import { useEffect } from "react";
+import useCategoryStore from "store/store";
 function MyApp({ Component, pageProps }) {
+  const setCategories = useCategoryStore((state) => state.setCategories);
   useEffect(() => {
     requestPermission();
+    getCategories();
   }, []);
+
+  async function getCategories() {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API_BASE_URL}/categories`)
+    const data = await res.json();
+    setCategories(data);
+  }
 
   function requestPermission() {
     console.log("Requesting permission...");

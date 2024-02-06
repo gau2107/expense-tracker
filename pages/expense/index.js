@@ -8,6 +8,7 @@ import queryString from 'query-string';
 import { useEffect, useState } from "react";
 import MonthFilter from "components/MonthFilter";
 import dayjs from "dayjs";
+import CategoryFilter from "components/CategoryFilter";
 
 export default function Expenses({ serverData }) {
 
@@ -22,7 +23,7 @@ export default function Expenses({ serverData }) {
   }, [filters]);
 
   const getData = async () => {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API_BASE_URL}/expense?${queryString.stringify(filters)}`)
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API_BASE_URL}/expense?${queryString.stringify(filters, { arrayFormat: 'bracket' })}`)
     const data = await res.json();
     setData({ ...data });
   }
@@ -32,9 +33,10 @@ export default function Expenses({ serverData }) {
   return (
     <BaseLayout>
       <Heading heading={"Expense"} />
-      <div className="flex">
+      <div className="flex ">
         <SearchBar onChange={(value) => setFilters({ ...filters, query: value })} value={filters.query} />
         <MonthFilter onChange={(value) => setFilters({ ...filters, month: value })} value={filters.month} />
+        <CategoryFilter onChange={(value) => setFilters({ ...filters, 'category_id': value?.map(v => v.value) })} />
       </div>
 
       <ExpenseTable {...data} handleDeleteApiCallback={() => handleDeleteApiCallback()} />
