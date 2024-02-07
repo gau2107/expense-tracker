@@ -2,19 +2,22 @@ import { useState, useEffect } from "react";
 import Button from "components/shared/Button";
 import CrDrBtn from "components/shared/CrDrBtn";
 import Input from "components/shared/Input";
-import Select from "components/shared/Select";
 import TextArea from "components/shared/TextArea";
 import { useForm } from "react-hook-form";
 import { useRouter } from 'next/router';
 import Swal from "sweetalert2";
-
+import useCategoryStore from "store/store";
+import dynamic from "next/dynamic";
 import {
   amountMsg,
   categoryMsg,
   dateMsg,
 } from "resources/messages";
 
-export default function AddExpenseForm({ categoryList, editData }) {
+const Select = dynamic(() => import("components/shared/Select"), { ssr: false });
+
+export default function AddExpenseForm({ editData }) {
+  const categoryList = useCategoryStore((state) => state.categories);
   const {
     register,
     handleSubmit,
@@ -104,7 +107,6 @@ export default function AddExpenseForm({ categoryList, editData }) {
         errors={errors}
         errorMsg={categoryMsg}
       />
-
       <TextArea
         divClassName={"mb-6"}
         label={"Note"}
