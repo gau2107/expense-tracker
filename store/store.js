@@ -1,17 +1,28 @@
 import create from "zustand";
 import { persist } from "zustand/middleware";
-const useAuthStore = create(
-  persist((set, get) => ({
-    isAuthenticated: false,
-    toggleIsAuthenticated: (val) => set(() => ({ isAuthenticated: val })),
-  }))
-);
+const createAuthStore = (set) => ({
+  isAuthenticated: false,
+  toggleIsAuthenticated: (val) => set(() => ({ isAuthenticated: val })),
+});
 
-const useCategoryStore = create(
-  persist((set, get) => ({
-    categories: [],
-    setCategories: (arr) => set(() => ({ categories: arr })),
-  }))
-);
+const createCategoryStore = (set) => ({
+  categories: [],
+  setCategories: (arr) => set(() => ({ categories: arr })),
+});
 
-export default useCategoryStore;
+const createPaymentModeStore = (set) => ({
+  paymentModes: [],
+  setPaymentModes: (arr) => set(() => ({ paymentModes: arr }))
+});
+
+
+export const useBoundStore = create(
+  persist(
+    (...a) => ({
+      ...createAuthStore(...a),
+      ...createCategoryStore(...a),
+      ...createPaymentModeStore(...a)
+    }),
+    {name: 'bound-store'}
+  )
+)

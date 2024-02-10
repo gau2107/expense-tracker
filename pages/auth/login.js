@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import useAuthStore from "store/store";
 import { useRouter } from "next/router";
 import Image from "next/image";
+import { useBoundStore } from "store/store";
 
 export default function Login() {
   const router = useRouter();
-  const authStoreVal = useAuthStore((state) => state.isAuthenticated);
-  const toggle = useAuthStore((state) => state.toggleIsAuthenticated);
+  const authStoreVal = useBoundStore((state) => state.isAuthenticated);
+  const toggle = useBoundStore((state) => state.toggleIsAuthenticated);
   const [isAuthenticated, setIsAuthenticated] = useState();
 
   

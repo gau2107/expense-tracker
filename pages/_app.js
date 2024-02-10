@@ -1,9 +1,9 @@
 import "../styles/globals.css";
 import NextNProgress from "nextjs-progressbar";
 import { useEffect } from "react";
-import useCategoryStore from "store/store";
+import { useBoundStore } from "store/store";
 function MyApp({ Component, pageProps }) {
-  const setCategories = useCategoryStore((state) => state.setCategories);
+  const setCategories = useBoundStore((state) => state.setCategories);
   useEffect(() => {
     requestPermission();
     getCategories();

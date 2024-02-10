@@ -1,9 +1,9 @@
 import { useState } from "react";
 import Select from "react-tailwindcss-select";
-import useCategoryStore from "store/store";
+import { useBoundStore } from "store/store";
 
 export default function CategoryFilter({ onChange, value }) {
-  let temp = useCategoryStore((state) => state.categories)
+  let temp = useBoundStore((state) => state.categories)
   let categories = [];
   temp.forEach((val) => categories.push({ value: val.id, label: val.name }));
 

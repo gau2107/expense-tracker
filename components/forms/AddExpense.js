@@ -6,18 +6,18 @@ import TextArea from "components/shared/TextArea";
 import { useForm } from "react-hook-form";
 import { useRouter } from 'next/router';
 import Swal from "sweetalert2";
-import useCategoryStore from "store/store";
 import dynamic from "next/dynamic";
 import {
   amountMsg,
   categoryMsg,
   dateMsg,
 } from "resources/messages";
+import { useBoundStore } from "store/store";
 
 const Select = dynamic(() => import("components/shared/Select"), { ssr: false });
 
 export default function AddExpenseForm({ editData }) {
-  const categoryList = useCategoryStore((state) => state.categories);
+  const categoryList = useBoundStore((state) => state.categories);
   const {
     register,
     handleSubmit,

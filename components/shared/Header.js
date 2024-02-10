@@ -1,11 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import { navMenus } from "resources/constants";
-import useAuthStore from "store/store";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-export default function Header({}) {
-  const toggle = useAuthStore((state) => state.toggleIsAuthenticated);
+import { useBoundStore } from "store/store";
+
+export default function Header({ }) {
+  const toggle = useBoundStore((state) => state.toggleIsAuthenticated);
   const [isAuthenticated, setIsAuthenticated] = useState();
 
 
@@ -19,7 +20,7 @@ export default function Header({}) {
       .then(() => {
         toggle(false);
       })
-      .catch((error) => {});
+      .catch((error) => { });
   };
   return (
     <>
