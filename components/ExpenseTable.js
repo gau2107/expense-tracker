@@ -57,6 +57,9 @@ export default function ExpenseTable({ list, total_amount: totalAmount, total_de
                   <div className="font-semibold text-left">Category</div>
                 </th>
                 <th className="p-2 whitespace-nowrap">
+                  <div className="font-semibold text-left">Payment Mode</div>
+                </th>
+                <th className="p-2 whitespace-nowrap">
                   <div className="font-semibold text-left">Cr/Dr</div>
                 </th>
                 <th className="p-2 whitespace-nowrap">
@@ -86,6 +89,11 @@ export default function ExpenseTable({ list, total_amount: totalAmount, total_de
                   <td className="p-2 whitespace-nowrap">
                     <div className="text-left">
                       {data.category.name}
+                    </div>
+                  </td>
+                  <td className="p-2 whitespace-nowrap">
+                    <div className="text-left">
+                      {data.payment_mode?.name}
                     </div>
                   </td>
                   <td className="p-2 whitespace-nowrap">

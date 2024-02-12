@@ -11,6 +11,7 @@ import {
   amountMsg,
   categoryMsg,
   dateMsg,
+  paymentModeMsg,
 } from "resources/messages";
 import { useBoundStore } from "store/store";
 
@@ -18,6 +19,7 @@ const Select = dynamic(() => import("components/shared/Select"), { ssr: false })
 
 export default function AddExpenseForm({ editData }) {
   const categoryList = useBoundStore((state) => state.categories);
+  const paymentModeList = useBoundStore((state) => state.paymentModes);
   const {
     register,
     handleSubmit,
@@ -107,6 +109,20 @@ export default function AddExpenseForm({ editData }) {
         errors={errors}
         errorMsg={categoryMsg}
       />
+
+      <Select
+        className="mb-6"
+        label={"Mode of payment"}
+        id={"payment_mode_id"}
+        name={"payment_mode_id"}
+        options={paymentModeList}
+        valueKey={'id'}
+        labelKey={'name'}
+        inpRef={{ ...register("payment_mode_id", { required: true }) }}
+        errors={errors}
+        errorMsg={paymentModeMsg}
+      />
+
       <TextArea
         divClassName={"mb-6"}
         label={"Note"}
