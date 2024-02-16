@@ -100,7 +100,7 @@ export default function ExpenseTable({ list, total_amount: totalAmount, total_de
                     <div className={`text-lg text-left text-${data.type === 'dr' ? 'red' : 'green'}-500 font-medium`}>{Constants[data.type]}</div>
                   </td>
                   <td className="p-2 whitespace-nowrap">
-                    <div className="text-left">{data.description}</div>
+                    <div className="text-left">{data.description || '-'}</div>
                   </td>
                   <td className="p-2 whitespace-nowrap">
                     <div className={`text-right text-${data.type === 'dr' ? 'red' : 'green'}-500 font-medium`}>{data.amount}</div>

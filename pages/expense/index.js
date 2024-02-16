@@ -9,6 +9,8 @@ import { useEffect, useState } from "react";
 import MonthFilter from "components/MonthFilter";
 import dayjs from "dayjs";
 import CategoryFilter from "components/CategoryFilter";
+import CrDrBtn from "components/shared/CrDrBtn";
+import PaymentModeFilter from "components/PaymentModeFilter";
 
 export default function Expenses({ serverData }) {
 
@@ -33,10 +35,12 @@ export default function Expenses({ serverData }) {
   return (
     <BaseLayout>
       <Heading heading={"Expense"} />
-      <div className="flex ">
+      <div className="flex items-baseline">
+        <CrDrBtn handleClick={(val) => setFilters({ ...filters, type: val })} selectedItem={filters.type} />
         <SearchBar onChange={(value) => setFilters({ ...filters, query: value })} value={filters.query} />
         <MonthFilter onChange={(value) => setFilters({ ...filters, month: value })} value={filters.month} />
         <CategoryFilter onChange={(value) => setFilters({ ...filters, 'category_id': value?.map(v => v.value) })} />
+        <PaymentModeFilter onChange={(value) => setFilters({ ...filters, 'payment_mode_id': value?.map(v => v.value) })} />
       </div>
 
       <ExpenseTable {...data} handleDeleteApiCallback={() => handleDeleteApiCallback()} />

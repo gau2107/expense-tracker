@@ -1,6 +1,6 @@
 import ValidationMessage from "./ValidationMesage";
 
-export default function CrDrBtn({ handleClick, selectedItem, className, divClassName, label }) {
+export default function CrDrBtn({ handleClick, selectedItem, className, divClassName, label, isRequired }) {
   return (
     <div className={divClassName || "mb-6"}>
     {label && (
@@ -33,7 +33,7 @@ export default function CrDrBtn({ handleClick, selectedItem, className, divClass
               text-black font-medium text-xs leading-tight uppercase focus:outline-none   
               transition duration-150 ease-in-out"
           >
-            Cr {!selectedItem && <ValidationMessage message={'*'} />}
+            Cr {!selectedItem && isRequired && <ValidationMessage message={'*'} />}
           </button>
         )}
 
@@ -55,7 +55,7 @@ export default function CrDrBtn({ handleClick, selectedItem, className, divClass
             text-black font-medium text-xs leading-tight uppercase focus:outline-none   
             transition duration-150 ease-in-out"
           >
-            Dr {!selectedItem && <ValidationMessage message={'*'} />}
+            Dr {!selectedItem && isRequired && <ValidationMessage message={'*'} />}
           </button>
         )}
       </div>
