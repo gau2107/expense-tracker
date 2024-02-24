@@ -46,22 +46,21 @@ export default function Add({ categoryList }) {
     <BaseLayout>
       <div className=" mx-0">
         <Heading heading={`Add Recurring Budget`} />
-        <AddBudgetForm callbackFn={addData} editFormData={editFormData} categoryList={categoryList} />
-        <div className="flex flex-col">
-          <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
-            <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
-              <div className="overflow-hidden">
-                <BudgetPreviewTable
-                  data={data}
-                  handleDelete={handleDelete}
-                  handleEdit={handleEdit}
-                />
+        <div className="grid gap-4 xl:grid-cols-4 m-4 ">
+          <AddBudgetForm callbackFn={addData} editFormData={editFormData} categoryList={categoryList} />
+          <div className="xl:col-span-3 xl:row-span-6 overflow-x-auto">
+            <div className=" sm:-mx-6 lg:-mx-8">
+              <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+                <div className="overflow-hidden">
+                  <BudgetPreviewTable
+                    data={data}
+                    handleDelete={handleDelete}
+                    handleEdit={handleEdit}
+                  />
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div className="mt-4 float-right">
-          <Button type={"button"} label={"Save"} />
         </div>
       </div>
     </BaseLayout>

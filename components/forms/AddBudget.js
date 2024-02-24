@@ -43,76 +43,70 @@ export default function AddBudgetForm({ callbackFn, editFormData, categoryList }
   };
 
   return (
-    <form className="mt-4" onSubmit={handleSubmit(onSubmit)}>
-      <div className="grid grid-cols-10 gap-2">
-        <div className="col-span-1 ">
-          <CrDrBtn
-            className={"justify-center"}
-            handleClick={handleCrDrClick}
-            selectedItem={type}
-          />
-        </div>
-
-        <Input
-          divClassName={"col-span-2 "}
-          placeHolder={"Amount"}
-          id={"amount"}
-          name={"amount"}
-          type={"number"}
-          inpRef={{ ...register("amount", { required: true }) }}
-          errors={errors}
-          errorMsg={amountMsg}
+    <form className="mt-4 grid gap-4" onSubmit={handleSubmit(onSubmit)}>
+      <div className="">
+        <CrDrBtn
+          divClassName={"mb-0"}
+          handleClick={handleCrDrClick}
+          selectedItem={type}
         />
-        <Input
-          divClassName={"col-span-2 "}
-          placeHolder={"Date"}
-          id={"date"}
-          name={"date"}
-          type={"date"}
-          inpRef={{ ...register("date", { required: true }) }}
-          errors={errors}
-          errorMsg={dateMsg}
-        />
-
-        <Select
-          className="col-span-2"
-          placeHolder={"Frequency"}
-          id={"frequency"}
-          name={"frequency"}
-          options={frequencies}
-          inpRef={{ ...register("frequency", { required: true }) }}
-          errors={errors}
-          errorMsg={frequencyMsg}
-          valueKey={'value'}
-          labelKey={'label'}
-        />
-
-        <Select
-          className="col-span-2"
-          placeHolder={"Category"}
-          id={"category"}
-          name={"category"}
-          options={categoryList}
-          inpRef={{ ...register("category", { required: true }) }}
-          errors={errors}
-          errorMsg={categoryMsg}
-          valueKey={'id'}
-          labelKey={'name'}
-        />
-
-        <TextArea
-          divClassName={"col-span-2 "}
-          placeHolder={"Note"}
-          id={"note"}
-          name={"note"}
-          rows={1}
-          inpRef={{ ...register("note") }}
-        />
-
-        <div className="col-span-1 ">
-          <Button label={"Add"} type={"submit"} />
-        </div>
       </div>
+      <Input
+        divClassName={""}
+        placeHolder={"Amount"}
+        id={"amount"}
+        name={"amount"}
+        type={"number"}
+        inpRef={{ ...register("amount", { required: true }) }}
+        errors={errors}
+        errorMsg={amountMsg}
+      />
+      <Input
+        divClassName={""}
+        placeHolder={"Date"}
+        id={"date"}
+        name={"date"}
+        type={"date"}
+        inpRef={{ ...register("date", { required: true }) }}
+        errors={errors}
+        errorMsg={dateMsg}
+      />
+      <Select
+        divClassName=""
+        placeHolder={"Frequency"}
+        id={"frequency"}
+        name={"frequency"}
+        options={frequencies}
+        inpRef={{ ...register("frequency", { required: true }) }}
+        errors={errors}
+        errorMsg={frequencyMsg}
+        valueKey={'value'}
+        labelKey={'label'}
+      />
+      <Select
+        divClassName=""
+        placeHolder={"Category"}
+        id={"category"}
+        name={"category"}
+        options={categoryList}
+        inpRef={{ ...register("category", { required: true }) }}
+        errors={errors}
+        errorMsg={categoryMsg}
+        valueKey={'id'}
+        labelKey={'name'}
+      />
+      <TextArea
+        divClassName={" "}
+        placeHolder={"Note"}
+        id={"note"}
+        name={"note"}
+        rows={3}
+        inpRef={{ ...register("note") }}
+      />
+      <div className=" ">
+        <Button label={"Add"} type={"submit"} />
+      </div>
+
     </form>
   );
 }

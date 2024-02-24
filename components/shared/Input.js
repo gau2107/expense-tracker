@@ -13,7 +13,7 @@ export default function Input({
   defaultValue
 }) {
   return (
-    <div className={divClassName || "mb-6"}>
+    <div className={typeof(divClassName) ? divClassName : "mb-6"}>
       {label && (
         <label
           htmlFor={id}

@@ -15,7 +15,7 @@ export default function Select({
   labelKey
 }) {
   return (
-    <div className={divClassName || "mb-6"}>
+    <div className={typeof(divClassName) === 'string' ? divClassName : "mb-6"}>
       {label && (
         <label
           htmlFor={id}

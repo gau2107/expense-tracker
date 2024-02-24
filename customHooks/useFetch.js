@@ -1,4 +1,4 @@
-const { useEffect, useState } = require("react")
+const { useState } = require("react")
 
 const useFetch = () => {
   const [data, setData] = useState(null);
