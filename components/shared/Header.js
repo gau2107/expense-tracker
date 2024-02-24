@@ -52,7 +52,7 @@ export default function Header({ }) {
           <div className="mr-4">
             <a
               onClick={() => handleLoginLogout()}
-              className="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-black hover:bg-white mt-4 lg:mt-0"
+              className="inline-block text-sm px-4 py-2 leading-none border rounded-full text-white border-white hover:border-transparent hover:text-black hover:bg-white mt-4 lg:mt-0"
             >
               {isAuthenticated ? "Logout" : "Login"}
             </a>

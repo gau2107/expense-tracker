@@ -11,6 +11,8 @@ import dayjs from "dayjs";
 import CategoryFilter from "components/CategoryFilter";
 import CrDrBtn from "components/shared/CrDrBtn";
 import PaymentModeFilter from "components/PaymentModeFilter";
+import Button from "components/shared/Button";
+import Link from "next/link";
 
 export default function Expenses({ serverData }) {
 
@@ -34,7 +36,14 @@ export default function Expenses({ serverData }) {
 
   return (
     <BaseLayout>
-      <Heading heading={"Expense"} />
+      <div className="grid grid-cols-2">
+        <Heading heading={"Expense"} />
+        <div className="flex justify-end items-center">
+          <Link href={"/expense/add"}>
+            <Button label={"Add Expense"} color="black" />
+          </Link>
+        </div>
+      </div>
       <div className="flex items-baseline">
         <CrDrBtn handleClick={(val) => setFilters({ ...filters, type: val })} selectedItem={filters.type} />
         <SearchBar onChange={(value) => setFilters({ ...filters, query: value })} value={filters.query} />
