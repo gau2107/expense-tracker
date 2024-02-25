@@ -103,8 +103,8 @@ export default function AddBudgetForm({ callbackFn, editFormData, categoryList }
         rows={3}
         inpRef={{ ...register("note") }}
       />
-      <div className=" ">
-        <Button label={"Add"} type={"submit"} />
+      <div className="text-right">
+        <Button label={"Save"} type={"submit"} />
       </div>
 
     </form>

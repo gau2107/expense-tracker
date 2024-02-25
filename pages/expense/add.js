@@ -6,7 +6,7 @@ export default function Add({ editData }) {
 
   return (
     <BaseLayout>
-      <div className="max-w-lg mx-auto">
+      <div className="max-w-lg xl:mx-auto m-4">
         <Heading heading={`Add Expense`} />
         <AddExpenseForm editData={editData} />
       </div>
