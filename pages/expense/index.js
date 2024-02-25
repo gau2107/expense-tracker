@@ -44,7 +44,7 @@ export default function Expenses({ serverData }) {
           </Link>
         </div>
       </div>
-      <div className="flex items-baseline">
+      <div className="hidden lg:flex lg:items-baseline">
         <CrDrBtn handleClick={(val) => setFilters({ ...filters, type: val })} selectedItem={filters.type} />
         <SearchBar onChange={(value) => setFilters({ ...filters, query: value })} value={filters.query} />
         <MonthFilter onChange={(value) => setFilters({ ...filters, month: value })} value={filters.month} />
