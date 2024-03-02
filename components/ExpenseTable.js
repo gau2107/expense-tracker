@@ -74,7 +74,7 @@ export default function ExpenseTable({ list, total_amount: totalAmount, total_de
               </tr>
             </thead>
             <tbody className="text-sm divide-y divide-gray-100">
-              {list.length > 0 && list.map((data, key) => (
+              {list.length ? list.map((data, key) => (
                 <tr key={key} className="hover:bg-stone-50">
                   <td className="p-2 whitespace-nowrap">
                     <div className="flex items-center">
@@ -114,7 +114,9 @@ export default function ExpenseTable({ list, total_amount: totalAmount, total_de
                     </div>
                   </td>
                 </tr>
-              ))}
+              ))
+            : <tr className="text-center">
+              <td colSpan={8} className="p-12 text-3xl">No expense found 😄</td></tr>}
               <tr>
                 <td colSpan={6} className="p-2 uppercase text-500 font-medium text-right">
                   <span className="pr-10">Total expenses:</span>

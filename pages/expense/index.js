@@ -58,7 +58,9 @@ export default function Expenses({ serverData }) {
 }
 
 export const getServerSideProps = (async () => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API_BASE_URL}/expense`)
+  const curMonth = dayjs().format('YYYY-MM');
+  let filters = { month: curMonth }
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API_BASE_URL}/expense?${queryString.stringify(filters)}}`)
   const data = await res.json();
   return { props: { serverData: data } }
 });
