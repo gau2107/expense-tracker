@@ -57,11 +57,11 @@ export default function BudgetPreviewTable({ data, handleEdit, handleDelete }) {
                         <div className="text-left">{rowData.frequency}</div>
                       </td>
                       <td className="p-2 whitespace-nowrap">
-                        <div className="text-left">{rowData.category}</div>
+                        <div className="text-left">{rowData.category.name}</div>
                       </td>
 
                       <td className="p-2 max-w-xs">
-                        <div className="text-left">{rowData.note}</div>
+                        <div className="text-left">{rowData.description || '-'}</div>
                       </td>
                       <td className="p-2 whitespace-nowrap">
                         {/* FIXME green font not showing in class ternary operator */}

@@ -5,7 +5,7 @@ import Heading from "components/shared/Heading";
 import { useState } from "react";
 import Swal from "sweetalert2";
 
-export default function Add({ }) {
+export default function Add({list}) {
   const [data, setData] = useState([]);
   const [editFormData, setEditFormData] = useState({});
 
@@ -52,7 +52,7 @@ export default function Add({ }) {
               <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
                 <div className="overflow-hidden">
                   <BudgetPreviewTable
-                    data={data}
+                    data={list}
                     handleDelete={handleDelete}
                     handleEdit={handleEdit}
                   />
@@ -65,3 +65,9 @@ export default function Add({ }) {
     </BaseLayout>
   );
 }
+
+export const getServerSideProps = (async () => {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API_BASE_URL}/recurring-expense`)
+  const list = await res.json();
+  return { props: {list} }
+});
