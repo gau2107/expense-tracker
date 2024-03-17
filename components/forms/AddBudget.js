@@ -38,11 +38,10 @@ export default function AddBudgetForm({ callbackFn, editFormData }) {
   }, [editFormData]);
 
   const onSubmit = (data, ev) => {
-    let editData;
     if (!type.length) return false;
     data = { ...data, type: type, user_id: 1 };
-    fetch(`${process.env.NEXT_PUBLIC_BACKEND_API_BASE_URL}/recurring-expense${editData?.id ? '/' + editData.id : ''}`, {
-      method: editData?.id ? 'put' : 'post', body: JSON.stringify(data), headers: {
+    fetch(`${process.env.NEXT_PUBLIC_BACKEND_API_BASE_URL}/recurring-expense${editFormData?.id ? '/' + editFormData.id : ''}`, {
+      method: editFormData?.id ? 'put' : 'post', body: JSON.stringify(data), headers: {
         "Content-type": "application/json; charset=UTF-8"
       }
     }).then(response => {
@@ -62,8 +61,10 @@ export default function AddBudgetForm({ callbackFn, editFormData }) {
           date: null,
           frequency: null,
           category: null,
-          note: null,
+          description: null,
         });
+        console.log(response, result);
+        callbackFn(response);
       });
     });
    
@@ -138,10 +139,10 @@ export default function AddBudgetForm({ callbackFn, editFormData }) {
       <TextArea
         divClassName={" "}
         placeHolder={"Note"}
-        id={"note"}
-        name={"note"}
+        id={"description"}
+        name={"description"}
         rows={3}
-        inpRef={{ ...register("note") }}
+        inpRef={{ ...register("description") }}
       />
       <div className="text-right">
         <Button label={"Save"} type={"submit"} />

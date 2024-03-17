@@ -1,12 +1,44 @@
-import DeleteSvg from "components/shared/svg/Delete";
-import EditSvg from "components/shared/svg/Edit";
+import Image from "next/image";
 import constants, { budgetThs } from "resources/constants";
-export default function BudgetPreviewTable({ data, handleEdit, handleDelete }) {
+import Swal from "sweetalert2";
+export default function BudgetPreviewTable({ data, handleEdit, callbackFn }) {
+
+  function handleDeleteClick(id) {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        handleDeleteApiCall(id);
+      }
+    });
+  }
+
+  function handleDeleteApiCall(id) {
+    fetch(`${process.env.NEXT_PUBLIC_BACKEND_API_BASE_URL}/expense/${id}`, {
+      method: 'delete', headers: {
+        "Content-type": "application/json; charset=UTF-8"
+      }
+    }).then(response => {
+      callbackFn();
+      Swal.fire({
+        title: "Deleted!",
+        text: "Your file has been deleted.",
+        icon: "success"
+      });
+    });
+  }
+
   return (
-    <section className="antialiased bg-gray-100 text-gray-600 h-fit px-4">
+    <section className="antialiased text-gray-600 h-fit px-4">
       <div className="flex flex-col justify-center h-full">
         <div className="w-full mx-auto bg-white shadow-lg rounded-sm border border-gray-200 m-8">
-          <header className="px-5 py-4 border-b border-gray-100">
+          <header className="px-5 py-4 border-b ">
             <h2 className="font-semibold text-gray-800">{`Budget Preview`}</h2>
           </header>
           <div className="p-3">
@@ -17,13 +49,12 @@ export default function BudgetPreviewTable({ data, handleEdit, handleDelete }) {
                     {budgetThs.map((th) => (
                       <th key={th} className="p-2 whitespace-nowrap">
                         <div
-                          className={`font-semibold text-${
-                            th === "Amount"
-                              ? "right"
-                              : th === "Actions"
+                          className={`font-semibold text-${th === "Amount"
+                            ? "right"
+                            : th === "Actions"
                               ? "center"
                               : "left"
-                          }`}
+                            }`}
                         >
                           {th}
                         </div>
@@ -43,9 +74,8 @@ export default function BudgetPreviewTable({ data, handleEdit, handleDelete }) {
                       </td>
                       <td className="p-2 whitespace-nowrap">
                         <div
-                          className={`text-lg text-left text-${
-                            rowData.type === "dr" ? "red" : "green"
-                          }-500 font-medium`}
+                          className={`text-lg text-left text-${rowData.type === "dr" ? "red" : "green"
+                            }-500 font-medium`}
                         >
                           {constants[rowData.type]}
                         </div>
@@ -81,8 +111,10 @@ export default function BudgetPreviewTable({ data, handleEdit, handleDelete }) {
                       </td>
                       <td className="p-2 whitespace-nowrap">
                         <div className="justify-center flex">
-                          <EditSvg onClick={() => handleEdit(rowData)} />
-                          <DeleteSvg onClick={() => handleDelete(key)} />
+                          <Image className="mr-2 cursor-pointer" src="/assets/edit.svg" alt="Edit" width={24} height={24}
+                            onClick={() => handleEdit(rowData)} />
+                          <Image className="ml-2 cursor-pointer" src="/assets/trash.svg" alt="Delete" width={24} height={24}
+                            onClick={() => handleDeleteClick(rowData.id)} />
                         </div>
                       </td>
                     </tr>
