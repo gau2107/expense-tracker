@@ -94,7 +94,6 @@ export default function BudgetPreviewTable({ data, handleEdit, callbackFn }) {
                         <div className="text-left">{rowData.description || '-'}</div>
                       </td>
                       <td className="p-2 whitespace-nowrap">
-                        {/* FIXME green font not showing in class ternary operator */}
                         {rowData.type === "dr" ? (
                           <div
                             className={`text-right text-red-500 font-medium`}
