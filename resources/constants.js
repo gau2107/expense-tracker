@@ -19,6 +19,7 @@ module.exports = Object.freeze({
     { title: "Budget", link: "/budget/add" },
     { title: "Add Expense", link: "/expense/add" },
     { title: "Expenses", link: "/expense" },
+    {title: "Statistics", link: '/statistics'}
   ],
   budgetThs: [
     "#",

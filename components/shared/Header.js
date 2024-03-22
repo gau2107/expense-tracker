@@ -26,7 +26,7 @@ export default function Header({ }) {
     <>
       <nav className="flex items-center justify-between flex-wrap bg-black p-2">
         <div className="flex items-center flex-shrink-0 text-white mr-4 ml-4">
-          <Link href="/" className="mr-4">
+          <Link href="/dashboard" className="mr-4">
             <Image
               className="mr-6"
               src="/favicon/favicon.ico"
