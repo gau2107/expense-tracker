@@ -17,8 +17,10 @@ export default function Statistics({ serverData, queryObj }) {
   useEffect(() => {
     setData(serverData)
     if (filters.month !== queryObj.month)
-      router.replace(`/statistics?${queryString.stringify(filters, { arrayFormat: 'bracket' })}`);
+      router.replace(`/statistics?${queryString.stringify(filters)}`);
   }, [filters, serverData]);
+
+  const checkIsPositive = (value) => value > 0;
 
   return (
     <BaseLayout>
@@ -29,10 +31,10 @@ export default function Statistics({ serverData, queryObj }) {
         </div>
       </div>
       <div className="grid gap-4 lg:gap-8 md:grid-cols-4 p-8 pt-20">
-        <StatCard title={"Credit"} value={data.total_credit_amount} info={`32 more this month`} />
-        <StatCard title={"Expenses"} value={data.total_debit_amount} info={`32 more this month`} />
-        <StatCard title={"Investments"} value={data.total_invested_amount} info={`32 more this month`} />
-        <StatCard title={"Savings"} value={data.total_amount} info={`32 more this month`} />
+        <StatCard title={"Credit"} value={data.total_credit_amount} info={`${data.total_credit_amount_diff}`} isGood={checkIsPositive(data.total_credit_amount_diff)}/>
+        <StatCard title={"Expenses"} value={data.total_debit_amount} info={`${data.total_debit_amount_diff}`} isGood={checkIsPositive(data.total_debit_amount_diff)} reverse={true}/>
+        <StatCard title={"Investments"} value={data.total_invested_amount} info={`${data.total_invested_amount_diff}`} isGood={checkIsPositive(data.total_invested_amount_diff)}/>
+        <StatCard title={"Savings"} value={data.total_amount} info={`${data.total_amount_diff}`} isGood={checkIsPositive(data.total_amount_diff)}/>
       </div>
     </BaseLayout>
   )
@@ -41,7 +43,8 @@ export const getServerSideProps = (async (context) => {
   const { query } = context;
   const curMonth = dayjs().format('YYYY-MM');
   let filters = { month: query.month || curMonth }
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API_BASE_URL}/statistics?${queryString.stringify(filters)}}`)
+  console.log(queryString.stringify(filters));
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API_BASE_URL}/statistics?${queryString.stringify(filters)}`)
   const data = await res.json();
   return { props: { serverData: data, queryObj: filters } }
 });
