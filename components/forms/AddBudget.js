@@ -63,7 +63,6 @@ export default function AddBudgetForm({ callbackFn, editFormData }) {
           category: null,
           description: null,
         });
-        console.log(response, result);
         callbackFn(response);
       });
     });
