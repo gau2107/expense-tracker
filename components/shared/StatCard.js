@@ -1,3 +1,4 @@
+import { removeHyphen } from "utils/Utils";
 import DownTrendSvg from "./svg/DownTrendSvg";
 import UpTrendSvg from "./svg/UpTrendSvg";
 
@@ -16,7 +17,7 @@ export default function StatCard({ title, value, info, isGood, reverse }) {
 
         <div className={`flex items-center space-x-1 rtl:space-x-reverse text-sm font-medium text-${isGood ^ reverse ? 'green' : 'red'}-500`}>
 
-          <span>{`${info} ${isGood ? 'more' : 'less'} this month`}</span>
+          <span>{`${removeHyphen(info)} ${isGood ? 'more' : 'less'} this month`}</span>
 
           {isGood ? <UpTrendSvg /> : <DownTrendSvg />}
         </div>
