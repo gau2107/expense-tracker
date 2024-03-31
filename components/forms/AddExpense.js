@@ -14,6 +14,7 @@ import {
   paymentModeMsg,
 } from "resources/messages";
 import { useBoundStore } from "store/store";
+import SearchSelect from "components/shared/SearchSelect";
 
 const Select = dynamic(() => import("components/shared/Select"), { ssr: false });
 
@@ -25,6 +26,8 @@ export default function AddExpenseForm({ editData }) {
     handleSubmit,
     reset,
     formState: { errors },
+    control,
+    setValue
   } = useForm();
 
   const router = useRouter();
@@ -97,7 +100,8 @@ export default function AddExpenseForm({ editData }) {
         errorMsg={dateMsg}
       />
 
-      <Select
+      <SearchSelect
+        control={control}
         className="mb-6"
         label={"Category"}
         id={"category_id"}
@@ -108,6 +112,7 @@ export default function AddExpenseForm({ editData }) {
         inpRef={{ ...register("category_id", { required: true }) }}
         errors={errors}
         errorMsg={categoryMsg}
+        setValue={setValue}
       />
 
       <Select
