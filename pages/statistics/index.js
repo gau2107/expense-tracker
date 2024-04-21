@@ -122,7 +122,7 @@ export const getServerSideProps = (async (context) => {
   const { query } = context;
   const curMonth = dayjs().format('YYYY-MM');
   let filters = { month: query.month || curMonth }
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API_BASE_URL}/statistics?${queryString.stringify(filters)}`)
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API_BASE_URL}/monthly-statistics?${queryString.stringify(filters)}`)
   const data = await res.json();
   return { props: { serverData: data, queryObj: filters } }
 });

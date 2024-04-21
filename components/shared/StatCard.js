@@ -12,15 +12,15 @@ export default function StatCard({ title, value, info, isGood, reverse }) {
         </div>
 
         <div className="text-3xl ">
-          {value}
+          ₹{value}
         </div>
 
-        <div className={`flex items-center space-x-1 rtl:space-x-reverse text-sm font-medium text-${isGood ^ reverse ? 'green' : 'red'}-500`}>
-
+        {info ? <div className={`flex items-center space-x-1 rtl:space-x-reverse text-sm font-medium text-${isGood ^ reverse ? 'green' : 'red'}-500`}>
           <span>{`${removeHyphen(info)} ${isGood ? 'more' : 'less'} this month`}</span>
-
           {isGood ? <UpTrendSvg /> : <DownTrendSvg />}
         </div>
+          : null}
+
       </div>
     </div>
   )
