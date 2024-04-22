@@ -102,16 +102,20 @@ export default function Statistics({ serverData, queryObj }) {
         </div>
       </div>
       <div className="grid gap-4 lg:gap-8 md:grid-cols-4 p-8 pt-20">
-        <StatCard title={"Credit"} value={data.total_credit_amount} info={`${data.total_credit_amount_diff}`} isGood={checkIsPositive(data.total_credit_amount_diff)} />
-        <StatCard title={"Expenses"} value={data.total_debit_amount} info={`${data.total_debit_amount_diff}`} isGood={checkIsPositive(data.total_debit_amount_diff)} reverse={true} />
-        <StatCard title={"Investments"} value={data.total_invested_amount} info={`${data.total_invested_amount_diff}`} isGood={checkIsPositive(data.total_invested_amount_diff)} />
-        <StatCard title={"Savings"} value={data.total_amount} info={`${data.total_amount_diff}`} isGood={checkIsPositive(data.total_amount_diff)} />
+        <StatCard title={"Credit"} value={data.total_credit_amount} info={`${data.total_credit_amount_diff}`}
+          isGood={checkIsPositive(data.total_credit_amount_diff)} staticText={`this month`} />
+        <StatCard title={"Expenses"} value={data.total_debit_amount} info={`${data.total_debit_amount_diff}`}
+          isGood={checkIsPositive(data.total_debit_amount_diff)} reverse={true} staticText={`this month`} />
+        <StatCard title={"Investments"} value={data.total_invested_amount} info={`${data.total_invested_amount_diff}`}
+          staticText={`this month`} isGood={checkIsPositive(data.total_invested_amount_diff)} />
+        <StatCard title={"Savings"} value={data.total_amount} info={`${data.total_amount_diff}`}
+          staticText={`this month`} isGood={checkIsPositive(data.total_amount_diff)} />
       </div>
       <div className="flex">
-        <div style={{ height: '400px', width: '40%'}} >
+        <div style={{ height: '400px', width: '40%' }} >
           <Doughnut data={chartData} options={options} />
         </div>
-        <div style={{ height: '400px', width: '60%'}} >
+        <div style={{ height: '400px', width: '60%' }} >
           <DailyExpenseChart data={dailyExpenseData} dates={dailyDates} />
         </div>
       </div>

@@ -5,10 +5,13 @@ export default function Dashboard({ serverData }) {
   return (
     <BaseLayout>
       <div className="grid gap-4 lg:gap-8 md:grid-cols-4 p-8 pt-20">
-        <StatCard title={"Total credit amount"} value={serverData.total_credit_amount} />
-        <StatCard title={"Total expense amount"} value={serverData.total_debit_amount} />
-        <StatCard title={"Total investment amount"} value={serverData.total_invested_amount} />
-        <StatCard title={"Total saving amount"} value={serverData.total_amount} />
+        <StatCard title={"Total credits of"} value={serverData.total_credit_amount} />
+        <StatCard title={"Total expenses of"} value={serverData.total_debit_amount}
+          info={`${serverData.total_debit_percent}%`} staticText={`of total expenses accounted`} />
+        <StatCard title={"Total investments of"} value={serverData.total_invested_amount} 
+        info={`${serverData.total_invested_percent}%`} staticText={`allocated for investments`} />
+        <StatCard title={"Total savings of"} value={serverData.total_amount} 
+        info={`${serverData.total_savings_percent}%`} staticText={`set aside as savings`}/>
       </div>
     </BaseLayout>
   )
