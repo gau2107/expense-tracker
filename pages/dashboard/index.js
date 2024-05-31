@@ -4,7 +4,7 @@ import StatCard from "components/shared/StatCard";
 export default function Dashboard({ serverData }) {
   return (
     <BaseLayout>
-      <div className="grid gap-4 lg:gap-8 md:grid-cols-4 p-8 pt-20">
+      <div className="grid gap-4 sm:grid-cols-1 lg:grid-cols-4 lg:gap-8 md:grid-cols-2 p-8 pt-20">
         <StatCard title={"Total credits of"} value={serverData.total_credit_amount} />
         <StatCard title={"Total expenses of"} value={serverData.total_debit_amount}
           info={`${serverData.total_debit_percent}%`} staticText={`of total expenses accounted`} />

@@ -27,7 +27,6 @@ export const options = {
       text: 'Daily expense',
     },
   },
-  responsive: true,
   scales: {
     x: {
       stacked: true,
@@ -67,6 +66,6 @@ export default function DailyExpenseChart({ data, dates }) {
     datasets: datasets,
   };
   return (
-    <Bar options={options} data={chartData} />
+    <Bar height={'600px'} width={'800px'} options={options} data={chartData} />
   )
 }

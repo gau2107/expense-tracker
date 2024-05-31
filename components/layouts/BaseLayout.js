@@ -31,7 +31,7 @@ export default function BaseLayout(props) {
       </Head>
       <Header user={user} />
       <main>
-        <div className="container mx-auto">{children}</div>
+        <div className="lg:container lg:mx-auto mx-2">{children}</div>
       </main>
     </>
   );

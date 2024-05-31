@@ -12,7 +12,22 @@ datalist {
 }
 .form-switch .form-check-input:checked {
   background-position: 100%;
-  background-image: url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%22-4 -4 8 8%22%3E%3Ccircle r=%223%22 fill=%22%23fff%22/%3E%3C/svg%3E');
+  background-image: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%22-4 -4 8 8%22%3E%3Ccircle r=%223%22 fill=%22%23fff%22/%3E%3C/svg%3E");
+}
+
+.stat-chart-1 {
+  height: 400px;
+}
+.stat-chart-2 {
+  height: 400px;
+}
+@media (max-width: 820px) {
+  .stat-chart-1 {
+    height: 400px;
+  }
+  .stat-chart-2 {
+    height: 400px;
+  }
 }
 
 svg {
@@ -33,7 +48,7 @@ input::-webkit-inner-spin-button {
 }
 
 /* Firefox */
-input[type=number] {
+input[type="number"] {
   -moz-appearance: textfield;
 }
 
