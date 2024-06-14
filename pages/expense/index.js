@@ -3,7 +3,6 @@ import SearchBar from "components/common/SearchBar";
 import BaseLayout from "components/layouts/BaseLayout";
 import Heading from "components/shared/Heading";
 import { useRouter } from 'next/router';
-import { isEmpty } from "radash";
 import queryString from 'query-string';
 import { useEffect, useState } from "react";
 import MonthFilter from "components/MonthFilter";
@@ -13,24 +12,20 @@ import CrDrBtn from "components/shared/CrDrBtn";
 import PaymentModeFilter from "components/PaymentModeFilter";
 import Button from "components/shared/Button";
 import Link from "next/link";
+import { isEqual } from "radash";
 
-export default function Expenses({ serverData }) {
+export default function Expenses({ serverData, queryObj }) {
 
   const curMonth = dayjs().format('YYYY-MM');
   const router = useRouter();
   const [filters, setFilters] = useState({ month: curMonth });
-  const [data, setData] = useState(serverData);
 
   useEffect(() => {
-    if (isEmpty(filters)) return;
-    getData();
-  }, [filters]);
+    if (!isEqual(filters, queryObj)) {
+      router.replace(`/expense?${queryString.stringify(filters, { arrayFormat: 'bracket' })}`);
+    }
 
-  const getData = async () => {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API_BASE_URL}/expense?${queryString.stringify(filters, { arrayFormat: 'bracket' })}`)
-    const data = await res.json();
-    setData({ ...data });
-  }
+  }, [filters]);
 
   const handleDeleteApiCallback = () => router.replace(router.asPath);
 
@@ -52,15 +47,16 @@ export default function Expenses({ serverData }) {
         <PaymentModeFilter onChange={(value) => setFilters({ ...filters, 'payment_mode_id': value?.map(v => v.value) })} />
       </div>
 
-      <ExpenseTable {...data} handleDeleteApiCallback={() => handleDeleteApiCallback()} />
+      <ExpenseTable {...serverData} handleDeleteApiCallback={() => handleDeleteApiCallback()} />
     </BaseLayout>
   );
 }
 
-export const getServerSideProps = (async () => {
+export const getServerSideProps = (async (context) => {
+  const { query } = context;
   const curMonth = dayjs().format('YYYY-MM');
-  let filters = { month: curMonth }
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API_BASE_URL}/expense?${queryString.stringify(filters)}}`)
+  let filters = { ...query, month: query.month || curMonth }
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API_BASE_URL}/expense?${queryString.stringify(filters, { arrayFormat: 'bracket' })}`);
   const data = await res.json();
-  return { props: { serverData: data } }
+  return { props: { serverData: data, queryObj: filters } }
 });

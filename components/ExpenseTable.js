@@ -74,7 +74,7 @@ export default function ExpenseTable({ list, total_amount: totalAmount, total_de
               </tr>
             </thead>
             <tbody className="text-sm divide-y divide-gray-100">
-              {list.length ? list.map((data, key) => (
+              {list?.length ? list.map((data, key) => (
                 <tr key={key} className="hover:bg-stone-50">
                   <td className="p-2 whitespace-nowrap">
                     <div className="flex items-center">
