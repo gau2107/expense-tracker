@@ -3,7 +3,6 @@ import AddBudgetForm from "components/forms/AddBudget";
 import BaseLayout from "components/layouts/BaseLayout";
 import Heading from "components/shared/Heading";
 import { useState } from "react";
-import Swal from "sweetalert2";
 import { useRouter } from 'next/router';
 
 export default function Add({list}) {

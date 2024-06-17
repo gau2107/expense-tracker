@@ -39,6 +39,29 @@ svg {
 a {
   cursor: pointer;
 }
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.spinner {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  border-left-color: #444;
+  animation: spin 1s ease infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
 
 /* TODO stop description drag */
 input::-webkit-outer-spin-button,

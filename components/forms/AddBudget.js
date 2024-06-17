@@ -27,6 +27,7 @@ export default function AddBudgetForm({ callbackFn, editFormData }) {
   } = useForm();
 
   const [type, setType] = useState("");
+  const [loading, setLoading] = useState(false);
   const handleCrDrClick = (value) => setType(value);
 
   const paymentModeList = useBoundStore((state) => state.paymentModes);
@@ -39,6 +40,7 @@ export default function AddBudgetForm({ callbackFn, editFormData }) {
 
   const onSubmit = (data, ev) => {
     if (!type.length) return false;
+    setLoading(true);
     data = { ...data, type: type, user_id: 1 };
     fetch(`${process.env.NEXT_PUBLIC_BACKEND_API_BASE_URL}/recurring-expense${editFormData?.id ? '/' + editFormData.id : ''}`, {
       method: editFormData?.id ? 'put' : 'post', body: JSON.stringify(data), headers: {
@@ -47,6 +49,7 @@ export default function AddBudgetForm({ callbackFn, editFormData }) {
     }).then(response => {
       if (ev) ev.target.reset();
       setType("");
+      setLoading(false);
       Swal.fire({
         position: "top-end",
         icon: "success",
@@ -144,7 +147,7 @@ export default function AddBudgetForm({ callbackFn, editFormData }) {
         inpRef={{ ...register("description") }}
       />
       <div className="text-right">
-        <Button label={"Save"} type={"submit"} />
+        <Button label={"Save"} type={"submit"} loading={loading} />
       </div>
 
     </form>

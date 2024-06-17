@@ -13,8 +13,8 @@ export default function ExpenseTable({ list, total_amount: totalAmount, total_de
       text: "You won't be able to revert this!",
       icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
+      confirmButtonColor: "#F44336",
+      cancelButtonColor: "black",
       confirmButtonText: "Yes, delete it!"
     }).then((result) => {
       if (result.isConfirmed) {
@@ -33,7 +33,8 @@ export default function ExpenseTable({ list, total_amount: totalAmount, total_de
       Swal.fire({
         title: "Deleted!",
         text: "Your file has been deleted.",
-        icon: "success"
+        icon: "success",
+        confirmButtonColor: "black"
       });
     });
   }

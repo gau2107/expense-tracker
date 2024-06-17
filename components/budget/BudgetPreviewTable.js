@@ -9,8 +9,8 @@ export default function BudgetPreviewTable({ data, handleEdit, callbackFn }) {
       text: "You won't be able to revert this!",
       icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
+      confirmButtonColor: "#F44336",
+      cancelButtonColor: "black",
       confirmButtonText: "Yes, delete it!"
     }).then((result) => {
       if (result.isConfirmed) {
