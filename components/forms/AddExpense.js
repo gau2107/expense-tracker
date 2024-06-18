@@ -32,8 +32,9 @@ export default function AddExpenseForm({ editData }) {
 
   const router = useRouter();
   const [type, setType] = useState("");
-  const [isRedirect, setIsRedirect] = useState(false);
+  const [isRedirect, setIsRedirect] = useState(0);
   const [loading, setLoading] = useState(false);
+  const [redirectLoading, setRedirectLoading] = useState(false);
 
   useEffect(() => {
     if (editData && editData.type) {
@@ -51,8 +52,9 @@ export default function AddExpenseForm({ editData }) {
 
   const onSubmit = (data, ev) => {
     if (!type.length) return false;
-    if (!loading)
+    if (!isRedirect)
       setLoading(true);
+    else setRedirectLoading(true);
     data = { ...data, type: type, user_id: 1 };
     fetch(`${process.env.NEXT_PUBLIC_BACKEND_API_BASE_URL}/expense${editData?.id ? '/' + editData.id : ''}`, {
       method: editData?.id ? 'put' : 'post', body: JSON.stringify(data), headers: {
@@ -62,6 +64,7 @@ export default function AddExpenseForm({ editData }) {
       if (ev) ev.target.reset();
       setType("");
       setLoading(false);
+      setRedirectLoading(false);
       Swal.fire({
         position: "top-end",
         icon: "success",
@@ -103,7 +106,6 @@ export default function AddExpenseForm({ editData }) {
         errors={errors}
         errorMsg={dateMsg}
       />
-
       <SearchSelect
         control={control}
         className="mb-6"
@@ -144,12 +146,12 @@ export default function AddExpenseForm({ editData }) {
       <div className="col-span-1 ">
         {!editData ?
           <>
-            <Button label={"Save & Add New"} type={"submit"} loading={loading && loading != 2} />
-            <Button label={"Save & View"} type={"button"} loading={loading == 2} onClick={() => { setIsRedirect(true); setLoading(2) }} />
+            <Button label={"Save & Add New"} type={"submit"} loading={loading} />
+            <Button label={"Save & View"} type={"button"} loading={redirectLoading} onClick={() => { setIsRedirect(isRedirect + 1) }} />
           </> :
           <>
             <Button label={"Cancel"} type={"button"} color={"red"} onClick={() => router.push('/expense')} />
-            <Button label={"Update"} type={"button"} loading={loading} onClick={() => setIsRedirect(true)} />
+            <Button label={"Update"} type={"button"} loading={redirectLoading} onClick={() => setIsRedirect(isRedirect + 1)} />
           </>
         }
 
