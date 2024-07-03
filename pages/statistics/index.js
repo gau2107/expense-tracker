@@ -80,7 +80,7 @@ export default function Statistics({ serverData, queryObj }) {
   const options = {
     cutout: 60,
     responsive: true,
-    maintainAspectRatio: true,
+    maintainAspectRatio: false,
     plugins: {
 
       legend: {
@@ -101,7 +101,7 @@ export default function Statistics({ serverData, queryObj }) {
           <MonthFilter onChange={(value) => setFilters({ ...filters, month: value })} value={filters.month} />
         </div>
       </div>
-      <div className="grid gap-4 lg:gap-8 md:grid-cols-2 lg:grid-cols-4 p-8 lg:pt-20">
+      <div className="grid gap-4 lg:gap-8 md:grid-cols-4 p-8 pt-20">
         <StatCard title={"Credit"} value={data.total_credit_amount} info={`${data.total_credit_amount_diff}`}
           isGood={checkIsPositive(data.total_credit_amount_diff)} staticText={`this month`} />
         <StatCard title={"Expenses"} value={data.total_debit_amount} info={`${data.total_debit_amount_diff}`}
@@ -111,11 +111,11 @@ export default function Statistics({ serverData, queryObj }) {
         <StatCard title={"Savings"} value={data.total_amount} info={`${data.total_amount_diff}`}
           staticText={`this month`} isGood={checkIsPositive(data.total_amount_diff)} />
       </div>
-      <div className="flex flex-col lg:flex-row">
-        <div className="stat-chart-1" >
-          <Doughnut height={'600px'} width={'800px'} data={chartData} options={options} />
+      <div className="flex">
+        <div style={{ height: '400px', width: '40%' }} >
+          <Doughnut data={chartData} options={options} />
         </div>
-        <div className="stat-chart-2" >
+        <div style={{ height: '400px', width: '60%' }} >
           <DailyExpenseChart data={dailyExpenseData} dates={dailyDates} />
         </div>
       </div>
