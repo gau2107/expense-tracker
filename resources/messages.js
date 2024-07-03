@@ -1,5 +1,5 @@
 module.exports = Object.freeze({
-  typeMsg: '*',
+  typeMsg: 'Please select type',
   amountMsg: 'Please enter amount',
   invalidAmountMsg: 'Entered amount is invalid',
   categoryMsg: 'Please select category',

@@ -12,6 +12,7 @@ import {
   categoryMsg,
   dateMsg,
   paymentModeMsg,
+  typeMsg,
 } from "resources/messages";
 import { useBoundStore } from "store/store";
 import SearchSelect from "components/shared/SearchSelect";
@@ -32,6 +33,7 @@ export default function AddExpenseForm({ editData }) {
 
   const router = useRouter();
   const [type, setType] = useState("");
+  const [typeError, setTypeError] = useState("");
   const [isRedirect, setIsRedirect] = useState(0);
   const [loading, setLoading] = useState(false);
   const [redirectLoading, setRedirectLoading] = useState(false);
@@ -51,7 +53,11 @@ export default function AddExpenseForm({ editData }) {
   const handleCrDrClick = (value) => setType(value);
 
   const onSubmit = (data, ev) => {
-    if (!type.length) return false;
+    if (!type.length) {
+      setTypeError(typeMsg)
+      return false;
+    }
+    setTypeError("typeMsg")
     if (!isRedirect)
       setLoading(true);
     else setRedirectLoading(true);
@@ -83,7 +89,7 @@ export default function AddExpenseForm({ editData }) {
   return (
     <form className="mt-4" onSubmit={handleSubmit(onSubmit)}>
       <div className="mb-6 ">
-        <CrDrBtn label={'Type'} handleClick={handleCrDrClick} selectedItem={type} />
+        <CrDrBtn label={'Type'} handleClick={handleCrDrClick} selectedItem={type} errorMsg={typeError} />
       </div>
 
       <Input
