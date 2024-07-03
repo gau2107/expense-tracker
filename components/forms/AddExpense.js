@@ -57,7 +57,7 @@ export default function AddExpenseForm({ editData }) {
       setTypeError(typeMsg)
       return false;
     }
-    setTypeError("typeMsg")
+    setTypeError("")
     if (!isRedirect)
       setLoading(true);
     else setRedirectLoading(true);
