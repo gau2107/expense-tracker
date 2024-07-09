@@ -40,13 +40,14 @@ export default function Header({ }) {
         <div className="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
           <div className="text-sm lg:flex-grow">
             {navMenus.map((menu, key) => (
+              <div key={key} className="lg:inline-block lg:mt-0 ">
               <Link
-                key={key}
                 href={menu.link}
-                className="lg:inline-block lg:mt-0 text-white hover:text-yellow-50 mr-4 font-medium text-base"
+                className=""
               >
-                {menu.title}
+                <span className="capitalize text-white mr-10 font-medium text-lg">{menu.title}</span>
               </Link>
+              </div>
             ))}
           </div>
           <div className="mr-4">
