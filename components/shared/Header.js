@@ -24,7 +24,7 @@ export default function Header({ }) {
   };
   return (
     <>
-      <nav className="flex items-center justify-between flex-wrap bg-black p-2">
+      <nav className="flex items-center justify-between xl:flex-wrap bg-black p-2">
         <div className="flex items-center flex-shrink-0 text-white mr-4 ml-4">
           <Link href="/dashboard" className="mr-4">
             <Image
@@ -37,8 +37,9 @@ export default function Header({ }) {
           </Link>
         </div>
 
-        <div className="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
-          <div className="text-sm lg:flex-grow">
+        <div className="block flex-grow lg:flex lg:items-center lg:w-auto
+        md:flex md:items-center md:flex-none">
+          <div className="text-sm lg:flex-grow md:flex">
             {navMenus.map((menu, key) => (
               <div key={key} className="lg:inline-block lg:mt-0 ">
               <Link
@@ -53,7 +54,7 @@ export default function Header({ }) {
           <div className="mr-4">
             <a
               onClick={() => handleLoginLogout()}
-              className="inline-block text-sm px-4 py-2 leading-none border rounded-full text-white border-white hover:border-transparent hover:text-black hover:bg-white mt-4 lg:mt-0"
+              className="inline-block text-sm px-4 py-2 leading-none border rounded-full text-white border-white hover:border-transparent hover:text-black hover:bg-white lg:mt-0"
             >
               {isAuthenticated ? "Logout" : "Login"}
             </a>
