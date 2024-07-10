@@ -24,7 +24,7 @@ export default function Header({ }) {
   };
   return (
     <>
-      <nav className="flex items-center justify-between xl:flex-wrap bg-black p-2">
+      <nav className="flex items-center xl:flex-wrap bg-black p-2">
         <div className="flex items-center flex-shrink-0 text-white mr-4 ml-4">
           <Link href="/dashboard" className="mr-4">
             <Image
@@ -37,8 +37,8 @@ export default function Header({ }) {
           </Link>
         </div>
 
-        <div className="block flex-grow lg:flex lg:items-center lg:w-auto
-        md:flex md:items-center md:flex-none">
+        <div className="block justify-between flex-1 flex-grow lg:flex lg:items-center lg:w-auto
+        md:flex md:items-center">
           <div className="text-sm lg:flex-grow md:flex">
             {navMenus.map((menu, key) => (
               <div key={key} className="lg:inline-block lg:mt-0 ">
