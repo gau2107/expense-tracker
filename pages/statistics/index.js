@@ -48,6 +48,7 @@ export default function Statistics({ serverData, queryObj }) {
     let dailyExpenseData = [];
     let dates = [];
     drList.forEach((expenseObj) => {
+      expenseObj.date = dayjs(expenseObj.date).format('ddd MMM DD YYYY')
       if (!dates.includes(expenseObj.date)) {
         dates.push(expenseObj.date);
       }
