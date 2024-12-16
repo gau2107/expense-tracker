@@ -24,12 +24,13 @@ function MyApp({ Component, pageProps }) {
   }
 
   function requestPermission() {
-    console.log("Requesting permission...");
-    Notification.requestPermission().then((permission) => {
-      if (permission === "granted") {
-        console.log("Notification permission granted.");
-      }
-    });
+    if ("Notification" in window) {
+      Notification.requestPermission().then((permission) => {
+        if (permission === "granted") {
+          console.log("Notification permission granted.");
+        }
+      });
+    }
   }
 
   return (

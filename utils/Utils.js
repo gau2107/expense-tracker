@@ -6,6 +6,34 @@ export function getRandomColor(value) {
 }
 
 export function removeHyphen(value = '') {
-  console.log(value)
   return value.replace(/-/g, '');
+}
+
+export function getChartOptions(title = '') {
+  return {
+    responsive: true,
+    maintainAspectRatio: false,
+    title: title,
+    plugins: {
+      legend: {
+        display: true,
+        position: 'top',
+      },
+    },
+    scales: {
+      x: {
+        title: {
+          display: true,
+          // text: 'Months',
+        },
+      },
+      y: {
+        title: {
+          display: true,
+          // text: 'Amount',
+        },
+        beginAtZero: true,
+      },
+    },
+  };
 }
