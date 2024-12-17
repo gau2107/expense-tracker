@@ -2,10 +2,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { navMenus } from "resources/constants";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useBoundStore } from "store/store";
+import { useSession, signIn, signOut } from "next-auth/react"
+
 
 export default function Header({ }) {
+  const { data: session } = useSession()
   const toggle = useBoundStore((state) => state.toggleIsAuthenticated);
   const [isAuthenticated, setIsAuthenticated] = useState();
 
@@ -13,7 +16,11 @@ export default function Header({ }) {
   const router = useRouter();
 
   const handleLoginLogout = () => {
-    isAuthenticated ? logout() : router.push("/auth/login");
+    if(session) {
+
+    } else {
+      signIn()
+    }
   };
   const logout = () => {
     signOut(auth)
@@ -56,7 +63,7 @@ export default function Header({ }) {
               onClick={() => handleLoginLogout()}
               className="inline-block text-sm px-4 py-2 leading-none border rounded-full text-white border-white hover:border-transparent hover:text-black hover:bg-white lg:mt-0"
             >
-              {isAuthenticated ? "Logout" : "Login"}
+              {session ? "Logout" : "Login"}
             </a>
           </div>
         </div>
