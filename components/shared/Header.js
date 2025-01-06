@@ -1,34 +1,55 @@
 import Image from "next/image";
 import Link from "next/link";
 import { navMenus } from "resources/constants";
-import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect } from "react";
 import { useBoundStore } from "store/store";
 import { useSession, signIn, signOut } from "next-auth/react"
 
 
 export default function Header({ }) {
   const { data: session } = useSession()
-  const toggle = useBoundStore((state) => state.toggleIsAuthenticated);
-  const [isAuthenticated, setIsAuthenticated] = useState();
+  useEffect(() => {
+    if (session) {
+      console.log(session)
+      const sendData = async () => {
+        try {
+          const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API_BASE_URL}/auth/google`, {
+            method: 'POST',
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              email: session.user.email,
+              name: session.user.name,
+              google_id: session.user.id,
+            })
+          });
 
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+          const data = await response.json();
 
-  const router = useRouter();
+          console.log("Laravel Response:", data);
+        } catch (error) {
+          console.error("Error sending data to Laravel:", error);
+        }
+      };
+
+      sendData();
+    }
+  }, [session]);
+
 
   const handleLoginLogout = () => {
-    if(session) {
-
+    if (session) {
+      signOut();
     } else {
       signIn()
     }
   };
-  const logout = () => {
-    signOut(auth)
-      .then(() => {
-        toggle(false);
-      })
-      .catch((error) => { });
-  };
+
+
   return (
     <>
       <nav className="flex items-center xl:flex-wrap bg-black p-2">
@@ -49,12 +70,12 @@ export default function Header({ }) {
           <div className="text-sm lg:flex-grow md:flex">
             {navMenus.map((menu, key) => (
               <div key={key} className="lg:inline-block lg:mt-0 ">
-              <Link
-                href={menu.link}
-                className=""
-              >
-                <span className="capitalize text-white mr-10 font-medium text-lg">{menu.title}</span>
-              </Link>
+                <Link
+                  href={menu.link}
+                  className=""
+                >
+                  <span className="capitalize text-white mr-10 font-medium text-lg">{menu.title}</span>
+                </Link>
               </div>
             ))}
           </div>
