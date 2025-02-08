@@ -20,7 +20,7 @@ export default function BudgetPreviewTable({ data, handleEdit, callbackFn }) {
   }
 
   function handleDeleteApiCall(id) {
-    fetch(`${process.env.NEXT_PUBLIC_BACKEND_API_BASE_URL}/expense/${id}`, {
+    fetch(`${process.env.NEXT_PUBLIC_BACKEND_API_BASE_URL}/recurring-expense/${id}`, {
       method: 'delete', headers: {
         "Content-type": "application/json; charset=UTF-8"
       }
