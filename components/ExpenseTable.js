@@ -3,14 +3,74 @@ import dayjs from "dayjs";
 import Image from 'next/image';
 import Swal from "sweetalert2";
 import { useRouter } from 'next/router';
+import { useState, useEffect } from 'react';
+
 export default function ExpenseTable({ list, total_amount: totalAmount, total_debit_amount: totalDebitAmount, handleDeleteApiCallback }) {
 
   const router = useRouter();
+  const [editingCategoryId, setEditingCategoryId] = useState(null);
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    fetchCategories();
+  }, []);
+
+  async function fetchCategories() {
+    try {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API_BASE_URL}/categories`);
+      if (!res.ok) {
+        throw new Error('Failed to fetch categories');
+      }
+      const categoriesData = await res.json();
+      console.log('Categories loaded:', categoriesData); // Debug log
+      setCategories(categoriesData);
+    } catch (error) {
+      console.error('Error fetching categories:', error);
+      // Try alternative endpoint
+      try {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API_BASE_URL}/category`);
+        if (res.ok) {
+          const categoriesData = await res.json();
+          console.log('Categories loaded from /category:', categoriesData); // Debug log
+          setCategories(categoriesData);
+        }
+      } catch (altError) {
+        console.error('Error fetching from alternative endpoint:', altError);
+      }
+    }
+  }
+
+  async function handleCategoryChange(expenseId, newCategoryId) {
+    try {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API_BASE_URL}/expense/${expenseId}`, {
+        method: 'PATCH',
+        headers: {
+          "Content-type": "application/json; charset=UTF-8"
+        },
+        body: JSON.stringify({ category_id: newCategoryId })
+      });
+
+      if (response.ok) {
+        setEditingCategoryId(null);
+        handleDeleteApiCallback(); // Refresh the table data
+      } else {
+        throw new Error('Failed to update category');
+      }
+    } catch (error) {
+      console.error('Error updating category:', error);
+      Swal.fire({
+        title: "Error!",
+        text: "Failed to update category.",
+        icon: "error",
+        confirmButtonColor: "black"
+      });
+    }
+  }
 
   function handleDeleteClick(id) {
     Swal.fire({
       title: "Are you sure?",
-      text: "You won't be able to revert this!",
+      text: "You won't be able to delete this!",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#F44336",
@@ -89,7 +149,32 @@ export default function ExpenseTable({ list, total_amount: totalAmount, total_de
                   </td>
                   <td className="p-2 whitespace-nowrap">
                     <div className="text-left">
-                      {data.category.name}
+                      {editingCategoryId === data.id ? (
+                        <select
+                          className="border border-gray-300 rounded px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                          defaultValue={data.category.id}
+                          onChange={(e) => handleCategoryChange(data.id, e.target.value)}
+                          onBlur={() => setEditingCategoryId(null)}
+                          autoFocus
+                        >
+                          {categories.map((category) => (
+                            <option key={category.id} value={category.id}>
+                              {category.name}
+                            </option>
+                          ))}
+                        </select>
+                      ) : (
+                        <span 
+                          className="cursor-pointer hover:bg-gray-100 px-2 py-1 rounded"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            setEditingCategoryId(data.id);
+                          }}
+                        >
+                          {data.category.name}
+                        </span>
+                      )}
                     </div>
                   </td>
                   <td className="p-2 whitespace-nowrap">
