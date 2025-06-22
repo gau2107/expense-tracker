@@ -14,6 +14,7 @@
     "chart.js": "^4.4.2",
     "dayjs": "1.11.6",
     "next": "13.0.5",
+    "next-auth": "^4.24.11",
     "nextjs-progressbar": "0.0.16",
     "query-string": "^8.1.0",
     "radash": "^11.0.0",

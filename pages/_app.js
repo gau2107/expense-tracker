@@ -2,7 +2,9 @@ import "../styles/globals.css";
 import NextNProgress from "nextjs-progressbar";
 import { useEffect } from "react";
 import { useBoundStore } from "store/store";
-function MyApp({ Component, pageProps }) {
+import { SessionProvider } from "next-auth/react"
+
+function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   const setCategories = useBoundStore((state) => state.setCategories);
   const setPaymentModes = useBoundStore((state) => state.setPaymentModes);
   useEffect(() => {
@@ -34,10 +36,10 @@ function MyApp({ Component, pageProps }) {
   }
 
   return (
-    <>
+    <SessionProvider session={session}>
       <NextNProgress color="#ffffff" />
       <Component {...pageProps} />
-    </>
+    </SessionProvider>
   );
 }
 
