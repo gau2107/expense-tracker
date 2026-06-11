@@ -13,12 +13,16 @@ import PaymentModeFilter from "components/PaymentModeFilter";
 import Button from "components/shared/Button";
 import Link from "next/link";
 import { isEqual } from "radash";
+import useDebounce from "customHooks/useDebounce";
 
 export default function Expenses({ serverData, queryObj }) {
 
   const curMonth = dayjs().format('YYYY-MM');
   const router = useRouter();
   const [filters, setFilters] = useState({ month: curMonth });
+  const [searchValue, setSearchValue] = useState(filters.query || '');
+
+  const debounce = useDebounce();
 
   useEffect(() => {
     if (!isEqual(filters, queryObj)) {
@@ -28,6 +32,21 @@ export default function Expenses({ serverData, queryObj }) {
   }, [filters]);
 
   const handleDeleteApiCallback = () => router.replace(router.asPath);
+
+  const handleSearchChange = (value) => {
+    setSearchValue(value);
+    const debouncedSearch = debounce((searchTerm) => {
+      setFilters(prev => ({ ...prev, query: searchTerm }));
+    }, 500);
+    debouncedSearch(value);
+  };
+
+  const handleCategoryChange  = (arr) => {
+    const debouncedCat = debounce((arr) => {
+      setFilters(prev => ({ ...prev, category_id: arr?.map(v => v.value) }));
+    }, 1000);
+    debouncedCat(arr);
+  }
 
   return (
     <BaseLayout>
@@ -41,9 +60,9 @@ export default function Expenses({ serverData, queryObj }) {
       </div>
       <div className="hidden lg:flex lg:items-baseline">
         <CrDrBtn handleClick={(val) => setFilters({ ...filters, type: val })} selectedItem={filters.type} />
-        <SearchBar onChange={(value) => setFilters({ ...filters, query: value })} value={filters.query} />
+        <SearchBar onChange={handleSearchChange} value={searchValue} />
         <MonthFilter onChange={(value) => setFilters({ ...filters, month: value })} value={filters.month} />
-        <CategoryFilter onChange={(value) => setFilters({ ...filters, 'category_id': value?.map(v => v.value) })} />
+        <CategoryFilter onChange={handleCategoryChange}/>
         <PaymentModeFilter onChange={(value) => setFilters({ ...filters, 'payment_mode_id': value?.map(v => v.value) })} />
       </div>
 
