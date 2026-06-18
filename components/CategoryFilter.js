@@ -7,7 +7,6 @@ export default function CategoryFilter({ onChange }) {
   let categories = [];
   temp.forEach((val) => categories.push({ value: val.id, label: val.name }));
 
-
   const [selectedCategories, setSelectedCategories] = useState(null);
   const handleChange = value => {
     setSelectedCategories(value);

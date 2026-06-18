@@ -7,7 +7,6 @@ export default function PaymentModeFilter({ onChange }) {
   let paymentModes = [];
   temp.forEach((val) => paymentModes.push({ value: val.id, label: val.name }));
 
-
   const [selectedPaymentModes, setSelectedPaymentModes] = useState(null);
   const handleChange = value => {
     setSelectedPaymentModes(value);

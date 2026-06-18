@@ -14,22 +14,63 @@ import Button from "components/shared/Button";
 import Link from "next/link";
 import { isEqual } from "radash";
 import useDebounce from "customHooks/useDebounce";
+import { useBoundStore } from "store/store";
 
 export default function Expenses({ serverData, queryObj }) {
 
   const curMonth = dayjs().format('YYYY-MM');
   const router = useRouter();
-  const [filters, setFilters] = useState({ month: curMonth });
-  const [searchValue, setSearchValue] = useState(filters.query || '');
+  const categoryList = useBoundStore((state) => state.categories);
+  const paymentModeList = useBoundStore((state) => state.paymentModes);
+
+  const normalizeFilters = (value) => {
+    const normalized = { ...(value || {}) };
+
+    Object.keys(normalized).forEach((key) => {
+      const item = normalized[key];
+      if (
+        item === undefined ||
+        item === null ||
+        item === '' ||
+        (Array.isArray(item) && item.length === 0)
+      ) {
+        delete normalized[key];
+      }
+    });
+
+    return normalized;
+  };
+
+  const [filters, setFilters] = useState(() => normalizeFilters({
+    month: queryObj?.month || curMonth,
+    ...queryObj,
+  }));
+  const [searchValue, setSearchValue] = useState(queryObj?.query || '');
 
   const debounce = useDebounce();
 
   useEffect(() => {
-    if (!isEqual(filters, queryObj)) {
-      router.replace(`/expense?${queryString.stringify(filters, { arrayFormat: 'bracket' })}`);
+    if (!router.isReady) return;
+
+    const normalizedFilters = normalizeFilters({
+      ...router.query,
+      month: router.query.month || curMonth,
+    });
+
+    if (!isEqual(filters, normalizedFilters)) {
+      setFilters(normalizedFilters);
+      setSearchValue(normalizedFilters.query || '');
     }
 
-  }, [filters]);
+  }, [router.isReady, router.query, curMonth]);
+
+  useEffect(() => {
+    if (!router.isReady) return;
+    if (!isEqual(filters, queryObj)) {
+      const query = queryString.stringify(filters, { arrayFormat: 'bracket' });
+      router.replace(`/expense${query ? `?${query}` : ''}`);
+    }
+  }, [filters, queryObj, router]);
 
   const handleDeleteApiCallback = () => router.replace(router.asPath);
 
@@ -41,12 +82,19 @@ export default function Expenses({ serverData, queryObj }) {
     debouncedSearch(value);
   };
 
-  const handleCategoryChange  = (arr) => {
-    const debouncedCat = debounce((arr) => {
-      setFilters(prev => ({ ...prev, category_id: arr?.map(v => v.value) }));
+  const handleCategoryChange = (arr) => {
+    const debouncedCat = debounce((value) => {
+      setFilters(prev => ({ ...prev, category_id: value?.map(v => v.value) }));
     }, 1000);
     debouncedCat(arr);
-  }
+  };
+
+  const handlePaymentModeChange = (arr) => {
+    const debouncedPayment = debounce((value) => {
+      setFilters(prev => ({ ...prev, payment_mode_id: value?.map(v => v.value) }));
+    }, 1000);
+    debouncedPayment(arr);
+  };
 
   return (
     <BaseLayout>
@@ -62,8 +110,8 @@ export default function Expenses({ serverData, queryObj }) {
         <CrDrBtn handleClick={(val) => setFilters({ ...filters, type: val })} selectedItem={filters.type} />
         <SearchBar onChange={handleSearchChange} value={searchValue} />
         <MonthFilter onChange={(value) => setFilters({ ...filters, month: value })} value={filters.month} />
-        <CategoryFilter onChange={handleCategoryChange}/>
-        <PaymentModeFilter onChange={(value) => setFilters({ ...filters, 'payment_mode_id': value?.map(v => v.value) })} />
+        <CategoryFilter onChange={handleCategoryChange} />
+        <PaymentModeFilter onChange={handlePaymentModeChange} />
       </div>
 
       <ExpenseTable {...serverData} handleDeleteApiCallback={() => handleDeleteApiCallback()} />

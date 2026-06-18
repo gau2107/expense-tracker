@@ -11,6 +11,13 @@ export default function ExpenseTable({ list, total_amount: totalAmount, total_de
   const [editingCategoryId, setEditingCategoryId] = useState(null);
   const [categories, setCategories] = useState([]);
 
+  const handleEditClick = (expenseId) => {
+    router.push({
+      pathname: `/expense/edit/${expenseId}`,
+      query: { returnUrl: router.asPath }
+    });
+  };
+
   useEffect(() => {
     fetchCategories();
   }, []);
@@ -194,7 +201,7 @@ export default function ExpenseTable({ list, total_amount: totalAmount, total_de
                   <td className="p-2">
                     <div className={`justify-center flex`}>
                       <Image className="mr-2 cursor-pointer" src="/assets/edit.svg" alt="Edit" width={24} height={24}
-                        onClick={() => router.push(`/expense/edit/${data.id}`)} />
+                        onClick={() => handleEditClick(data.id)} />
                       <Image className="ml-2 cursor-pointer" src="/assets/trash.svg" alt="Delete" width={24} height={24}
                         onClick={() => handleDeleteClick(data.id)} />
                     </div>

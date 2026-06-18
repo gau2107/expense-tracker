@@ -32,11 +32,16 @@ export default function AddExpenseForm({ editData }) {
   } = useForm();
 
   const router = useRouter();
+  const returnUrl = typeof router.query.returnUrl === 'string' ? router.query.returnUrl : '';
   const [type, setType] = useState("");
   const [typeError, setTypeError] = useState("");
   const [isRedirect, setIsRedirect] = useState(0);
   const [loading, setLoading] = useState(false);
   const [redirectLoading, setRedirectLoading] = useState(false);
+
+  const navigateBack = () => {
+    router.replace(returnUrl || '/expense');
+  };
 
   useEffect(() => {
     if (editData && editData.type) {
@@ -80,7 +85,7 @@ export default function AddExpenseForm({ editData }) {
         heightAuto: false,
         timer: 1500
       }).then((result) => {
-        if (isRedirect) router.push('/expense');
+        if (isRedirect) navigateBack();
       });
     });
 
@@ -156,7 +161,7 @@ export default function AddExpenseForm({ editData }) {
             <Button label={"Save & View"} type={"button"} loading={redirectLoading} onClick={() => { setIsRedirect(isRedirect + 1) }} />
           </> :
           <>
-            <Button label={"Cancel"} type={"button"} color={"red"} onClick={() => router.push('/expense')} />
+            <Button label={"Cancel"} type={"button"} color={"red"} onClick={navigateBack} />
             <Button label={"Update"} type={"button"} loading={redirectLoading} onClick={() => setIsRedirect(isRedirect + 1)} />
           </>
         }
